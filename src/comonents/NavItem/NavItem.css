@@ -1,0 +1,45 @@
+@keyframes fadeInBackground {
+  from {
+    background-color: transparent;
+  }
+  to {
+    background-color: rgba(64, 111, 243, 0.1);
+  }
+}
+
+@keyframes fadeInColor {
+  from {
+    color: #6a778e;
+  }
+  to {
+    color: #406ff3;
+  }
+}
+
+.navItem {
+  padding: 5px;
+}
+
+.navItem a {
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
+  display: block;
+  color: #6a778e;
+  text-decoration: none;
+  height: 3.5rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  transition: color 250ms ease-in-out;
+  background-color: transparent; /* Make sure the initial background is transparent */
+}
+
+.navItem a:hover, .navItem a:focus {
+  animation: fadeInColor 250ms ease-in-out forwards, fadeInBackground 250ms ease-in-out forwards;
+}
+
+.navItem a span {
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
+}

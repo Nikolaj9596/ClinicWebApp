@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,400&display=swap');
+
+.app {
+  display: flex;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+.navBar {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem 0;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
+  height: calc(100vh - 4rem);
+}
+
+.navBar__menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.navBar__link {
+  display: flex;
+  align-items: center;
+  text-indent: 1rem; /* Adjust to your preference for text alignment */
+}
+
+.navBar__link span {
+  margin-left: 1rem; /* Spacing between icon and text */
+  display: inline-block; /* Ensures that text is aligned properly */
+}
+
+.content {
+  margin-left: 100px; /* Adjust the size to match the width of your navbar */
+  width: calc(100% - 200px); /* This makes sure that content uses the remaining width */
+  padding: 10px;
+}
