@@ -39,3 +39,7 @@
   width: calc(100% - 200px); /* This makes sure that content uses the remaining width */
   padding: 10px;
 }
+
+.table {
+  padding: 1rem 4rem;
+}
