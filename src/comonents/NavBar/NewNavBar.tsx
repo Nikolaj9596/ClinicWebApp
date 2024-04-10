@@ -10,12 +10,8 @@ import {
   Typography,
   Icon
 } from '@mui/material';
-import MasksIcon from '@mui/icons-material/Masks';
-import GroupsIcon from '@mui/icons-material/Groups';
-import "./NavBar.css";
-import { NavLink } from 'react-router-dom';
 
-const NavBar: React.FC = () => {
+const Sidebar: React.FC = () => {
   return (
     <Drawer
       variant="permanent"
@@ -49,26 +45,32 @@ const NavBar: React.FC = () => {
           borderRadius: '12px'
         }}
       >
-        <Typography variant="h6">CRM Пилюлькин</Typography>
+        <Typography variant="h6">Material Dashboard 2</Typography>
       </Box>
       <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.12)' }} />
       <List>
-        <ListItem button component={NavLink} to="/doctors">
+        <ListItem button component="a" href="/dashboard">
           <ListItemIcon>
-            {/* <Icon sx={{ color: 'rgba(255, 255, 255, 0.87)' }}>Врачи</Icon> */}
-            <MasksIcon sx={{ color: 'rgba(255, 255, 255, 0.87)' }} />
+            <Icon sx={{ color: 'rgba(255, 255, 255, 0.87)' }}>dashboard</Icon>
           </ListItemIcon>
-          <ListItemText primary="Врачи" />
+          <ListItemText primary="Dashboard" />
         </ListItem>
-        <ListItem button component={NavLink} to="/clients">
+        {/* Repeat ListItem for other navigation links... */}
+        <ListItem button component="a" href="/authentication/sign-in">
           <ListItemIcon>
-            <GroupsIcon sx={{ color: 'rgba(255, 255, 255, 0.87)' }}/>
+            <Icon sx={{ color: 'rgba(255, 255, 255, 0.87)' }}>login</Icon>
           </ListItemIcon>
-          <ListItemText primary="Клиенты" />
+          <ListItemText primary="Sign In" />
+        </ListItem>
+        <ListItem button component="a" href="/authentication/sign-up">
+          <ListItemIcon>
+            <Icon sx={{ color: 'rgba(255, 255, 255, 0.87)' }}>assignment</Icon>
+          </ListItemIcon>
+          <ListItemText primary="Sign Up" />
         </ListItem>
       </List>
     </Drawer>
   );
 };
 
-export default NavBar;
+export default Sidebar;

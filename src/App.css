@@ -14,8 +14,8 @@
   background: #fff;
   border-radius: 10px;
   padding: 1rem 0;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
-  height: calc(100vh - 4rem);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+  height: calc(150vh - 4rem);
 }
 
 .navBar__menu {
@@ -35,11 +35,16 @@
 }
 
 .content {
-  margin-left: 100px; /* Adjust the size to match the width of your navbar */
+  margin-left: 150px; /* Adjust the size to match the width of your navbar */
+  margin-top: 10px; /* Adjust the size to match the width of your navbar */
   width: calc(100% - 200px); /* This makes sure that content uses the remaining width */
   padding: 10px;
 }
 
 .table {
-  padding: 1rem 4rem;
+  padding: 1rem 1rem;
+  border-radius: 8px;
+  box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background: #fff;
 }

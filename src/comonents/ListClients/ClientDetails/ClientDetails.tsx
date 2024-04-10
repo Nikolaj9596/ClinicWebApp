@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ClientDetailsPropsType, ClientType } from '../../../state/client.type';
+import "./ClientDetails.css"
 
 // Предполагается, что у вас есть определенный сервис для получения данных о клиенте
 // import { fetchClientDetails } from './clientService';
@@ -32,27 +33,46 @@ export const ClientDetails: React.FC<ClientDetailsPropsType> = (props) => {
   }, [id]);
 
   if (loading) {
-    return <p>Загрузка...</p>;
+    return <div className="client-details-container"><p>Загрузка...</p></div>;
   }
 
   if (error) {
-    return <p>Ошибка: {error}</p>;
+    return <div className="client-details-container"><p>Ошибка: {error}</p></div>;
   }
 
   if (!client) {
-    return <p>Клиент не найден</p>;
+    return <div className="client-details-container"><p>Клиент не найден</p></div>;
   }
 
-  // Отображение информации о клиенте
   return (
-    <div>
-      <h1>Детали клиента</h1>
-      <p>ID: {client.id}</p>
-      <p>Имя: {client.firstName}</p>
-      <p>Фамилия: {client.lastName}</p>
-      <p>Отчество: {client.middleName}</p>
-      <p>Дата рождения: {client.dateBirthday}</p> {/* Строку можно отформатировать для красивого отображения даты */}
-      <p>Адрес: {client.address}</p>
+    <div className="client-details-container">
+      <div className="client-details-header">
+        <h1>Информация о посетителе</h1>
+      </div>
+      <div className="client-details">
+        <span className="client-details-label">ID:</span>
+        <span className="client-details-value">{client.id}</span>
+      </div>
+      <div className="client-details">
+        <span className="client-details-label">Имя:</span>
+        <span className="client-details-value">{client.firstName}</span>
+      </div>
+      <div className="client-details">
+        <span className="client-details-label">Фамилия:</span>
+        <span className="client-details-value">{client.lastName}</span>
+      </div>
+      <div className="client-details">
+        <span className="client-details-label">Отчество:</span>
+        <span className="client-details-value">{client.middleName}</span>
+      </div>
+      <div className="client-details">
+        <span className="client-details-label">Дата рождения:</span>
+        <span className="client-details-value">{client.dateBirthday}</span>
+      </div>
+      <div className="client-details">
+        <span className="client-details-label">Адрес:</span>
+        <span className="client-details-value">{client.address}</span>
+      </div>
     </div>
   );
 };

@@ -14,12 +14,15 @@ export type ListDoctorsProps = {
   doctors: Array<DoctorType>
 }
 
+export type DoctorDetailsPropsType = {
+  getDoctorById: (doctorId: number) => DoctorType | null
+}
 
+// Actions
 export enum DoctorActions {
   removeDoctorByIdAction = "REMOVE_DOCTOR_BY_ID"
 }
 
-// Actions
 export type RemoveDoctorByIdActionType = {
   type: DoctorActions.removeDoctorByIdAction
   doctorId: number

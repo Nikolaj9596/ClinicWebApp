@@ -48,6 +48,7 @@ const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
     firstName: doc.firstName,
     middleName: doc.middleName,
     age: calculateAge(doc.dateBirthday),
+    dateStartWork: calculateAge(doc.dateStartWork),
     profession: doc.profession.name,
   }));
 
@@ -65,6 +66,7 @@ const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
         }}
         pageSizeOptions={[5, 10]}
         checkboxSelection
+        style={{padding: 0}}
       />
     </div>
   );
