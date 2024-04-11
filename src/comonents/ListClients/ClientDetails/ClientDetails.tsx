@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ClientDetailsPropsType, ClientType } from '../../../state/client.type';
 import "./ClientDetails.css"
+import { Paper, Box, Grid, Typography, Avatar, styled } from '@mui/material';
 
 // Предполагается, что у вас есть определенный сервис для получения данных о клиенте
 // import { fetchClientDetails } from './clientService';
@@ -44,36 +45,41 @@ export const ClientDetails: React.FC<ClientDetailsPropsType> = (props) => {
     return <div className="client-details-container"><p>Клиент не найден</p></div>;
   }
 
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(3),
+  borderRadius: 10,
+  boxShadow: theme.shadows[3],
+  marginLeft: 150, // добавляем отступ слева
+}));
+
+  const fullName = `${client.lastName} ${client.firstName} ${client.middleName}`;
   return (
-    <div className="client-details-container">
-      <div className="client-details-header">
-        <h1>Информация о посетителе</h1>
-      </div>
-      <div className="client-details">
-        <span className="client-details-label">ID:</span>
-        <span className="client-details-value">{client.id}</span>
-      </div>
-      <div className="client-details">
-        <span className="client-details-label">Имя:</span>
-        <span className="client-details-value">{client.firstName}</span>
-      </div>
-      <div className="client-details">
-        <span className="client-details-label">Фамилия:</span>
-        <span className="client-details-value">{client.lastName}</span>
-      </div>
-      <div className="client-details">
-        <span className="client-details-label">Отчество:</span>
-        <span className="client-details-value">{client.middleName}</span>
-      </div>
-      <div className="client-details">
-        <span className="client-details-label">Дата рождения:</span>
-        <span className="client-details-value">{client.dateBirthday}</span>
-      </div>
-      <div className="client-details">
-        <span className="client-details-label">Адрес:</span>
-        <span className="client-details-value">{client.address}</span>
-      </div>
-    </div>
+    <StyledPaper elevation={3}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={4}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar alt={fullName} src={client.avatar} sx={{ width: 128, height: 128 }} />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <Typography variant="h4" gutterBottom>
+            {fullName}
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            Дата рождения: {client.dateBirthday}
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            Адрес: {client.address}
+          </Typography>
+        </Grid>
+      </Grid>
+    </StyledPaper>
   );
 };
 

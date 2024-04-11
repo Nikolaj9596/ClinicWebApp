@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { DoctorDetailsPropsType, DoctorType } from '../../../state/doctor.type';
+import { Paper, Box, Grid, Typography, Avatar, styled } from '@mui/material';
+import { calculateAge } from '../../../utils';
 
 
 export const DoctorDetails: React.FC<DoctorDetailsPropsType> = (props) => {
@@ -41,18 +43,44 @@ export const DoctorDetails: React.FC<DoctorDetailsPropsType> = (props) => {
     return <p>Врач не найден</p>;
   }
 
-  // Отображение информации о клиенте
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(3),
+  borderRadius: 10,
+  boxShadow: theme.shadows[3],
+  marginLeft: 150,
+}));
+
+  const fullName = `${client.lastName} ${client.firstName} ${client.middleName}`;
   return (
-    <div>
-      <h1>Детали клиента</h1>
-      <p>ID: {client.id}</p>
-      <p>Имя: {client.firstName}</p>
-      <p>Фамилия: {client.lastName}</p>
-      <p>Отчество: {client.middleName}</p>
-      <p>Дата рождения: {client.dateBirthday}</p> {/* Строку можно отформатировать для красивого отображения даты */}
-      <p>Дата начала работы: {client.dateStartWork}</p>
-      <p>Специальность: {client.profession.name}</p>
-    </div>
+    <StyledPaper elevation={3}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={4}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar alt={fullName} src={client.avatar} sx={{ width: 128, height: 128 }} />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <Typography variant="h4" gutterBottom>
+            {fullName}
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            Дата рождения: {client.dateBirthday}
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            Профессия: {client.profession.name}
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            Стаж работы: {calculateAge(client.dateStartWork)}
+          </Typography>
+        </Grid>
+      </Grid>
+    </StyledPaper>
   );
 };
 

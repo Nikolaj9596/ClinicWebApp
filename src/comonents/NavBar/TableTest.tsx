@@ -1,86 +1,58 @@
 import React from 'react';
-import {
-  Avatar,
-  Box,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography
-} from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { calculateAge } from '../../utils';
+import { Paper, Box, Grid, Typography, Avatar, styled } from '@mui/material';
 
-// Обновленный тип DoctorType с полем avatar
-export type DoctorType = {
+export type ClientType = {
   id: number;
   lastName: string;
   firstName: string;
   middleName: string;
-  profession: { id: number; name: string };
   dateBirthday: string;
-  dateStartWork: string;
-  // avatar: string; // Путь к аватарке
+  address: string;
+  avatar: string;
 };
 
-type DoctorsTableProps = {
-  doctors: DoctorType[];
-};
+interface ClientProfileProps {
+  client: ClientType;
+}
 
-export const DoctorsTable: React.FC<DoctorsTableProps> = ({ doctors }) => {
-  const navigate = useNavigate(); // Хук для навигации
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(3),
+  borderRadius: 10,
+  boxShadow: theme.shadows[3],
+  marginLeft: 150, // добавляем отступ слева
+}));
 
-  // Обработчик клика по строке таблицы
-  const handleRowClick = (doctorId: number) => {
-    navigate(`/doctors/${doctorId}`);
-  };
+const ClientProfilePage: React.FC<ClientProfileProps> = ({ client }) => {
+  const fullName = `${client.lastName} ${client.firstName} ${client.middleName}`;
 
   return (
-    <TableContainer
-      component={Paper}
-      sx={{
-        maxWidth: "calc(100% - 150px)", // Убедитесь, что ширина таблицы учитывает ширину navbar
-        marginLeft: "150px", // Отступ слева, равный ширине navbar
-        boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
-        borderRadius: "10px",
-        overflow: "hidden"
-      }}
-    >
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            {/* <TableCell></TableCell>  */}
-            <TableCell>Фамилия</TableCell>
-            <TableCell>Имя</TableCell>
-            <TableCell>Отчество</TableCell>
-            <TableCell>Профессия</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {doctors.map((doctor) => (
-            <TableRow key={doctor.id} hover style={{ cursor: 'pointer' }}  onClick={() => handleRowClick(doctor.id)} >
-              {/* <TableCell> */}
-              {/*   <Box sx={{ display: 'flex', alignItems: 'center' }}> */}
-              {/*     <Avatar src={doctor.avatar} alt={${doctor.firstName} ${doctor.lastName}} /> */}
-              {/*     <Box sx={{ ml: 2 }}> */}
-              {/*       <Typography variant="button">{doctor.firstName} {doctor.lastName}</Typography> */}
-              {/*       <Typography variant="caption">{doctor.profession.name}</Typography> */}
-              {/*     </Box> */}
-              {/*   </Box> */}
-              {/* </TableCell> */}
-              <TableCell>{doctor.lastName}</TableCell>
-              <TableCell>{doctor.firstName}</TableCell>
-              <TableCell>{doctor.middleName}</TableCell>
-              <TableCell>{doctor.profession.name}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <StyledPaper elevation={3}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={4}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar alt={fullName} src={client.avatar} sx={{ width: 128, height: 128 }} />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <Typography variant="h4" gutterBottom>
+            {fullName}
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            Дата рождения: {client.dateBirthday}
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            Адрес: {client.address}
+          </Typography>
+        </Grid>
+      </Grid>
+    </StyledPaper>
   );
 };
 
-export default DoctorsTable;
+export default ClientProfilePage;

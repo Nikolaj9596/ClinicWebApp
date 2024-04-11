@@ -6,7 +6,7 @@ import ListClients from './comonents/ListClients/ListClients';
 import { DoctorDetails } from './comonents/ListDoctors/DoctorDetails/DoctorDetails';
 import ListDoctors from './comonents/ListDoctors/ListDoctors';
 import NavBar from './comonents/NavBar/NavBar';
-import { DoctorsTable } from './comonents/NavBar/TableTest';
+import ClientProfilePage from './comonents/NavBar/TableTest';
 import { ClientType } from './state/client.type';
 import { DoctorType } from './state/doctor.type';
 import { AppRootState } from './state/store';
@@ -23,6 +23,7 @@ function App() {
     borderRadius: "10px",
     overflow: "hidden"
   }
+
   const getClientById = (clientId: number): ClientType | null => {
     return clients.find((tl) => tl.id === clientId) || null;
   };
@@ -35,14 +36,13 @@ function App() {
     <div className="app">
       <nav className="navBar">
         <NavBar />
-        {/* <Sidebar/> */}
       </nav>
       <div className="content">
         <Routes>
-      
-          <Route path="/test" element={<DoctorsTable doctors={doctors}/>} />
-          <Route path="/doctors" element={<ListDoctors doctors={doctors} tableStyles={tableStyles}/>} />
-          <Route path="/clients" element={<ListClients clients={clients} tableStyles={tableStyles}/>} />
+
+          <Route path="/test" element={<ClientProfilePage client={{ id: 1, lastName: 'Иванов', firstName: 'Иван', middleName: 'Иванович', dateBirthday: '01.01.1980', address: 'г. Москва, ул. Пушкина, д.1', avatar: 'url_to_avatar_image', }} />} />
+          <Route path="/doctors" element={<ListDoctors doctors={doctors} tableStyles={tableStyles} />} />
+          <Route path="/clients" element={<ListClients clients={clients} tableStyles={tableStyles} />} />
           <Route path="clients/:id" element={<ClientDetails getClientById={getClientById} />} />
           <Route path="doctors/:id" element={<DoctorDetails getDoctorById={getDoctorById} />} />
         </Routes>
