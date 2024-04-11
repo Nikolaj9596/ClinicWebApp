@@ -1,4 +1,5 @@
 import React from 'react'
+import { TableStylesType } from './core.type';
 
 export enum Actions {
   removeClientByIdAction = "REMOVE_CLIENT_BY_ID"
@@ -10,12 +11,15 @@ export type ClientType = {
   firstName: string;
   middleName: string;
   dateBirthday: string;
-  address: string
+  address: string;
+  avatar: string;
+
 }
 
 // Props
 export type ListClientsProps = {
   clients: Array<ClientType>,
+  tableStyles: TableStylesType
 }
 
 export type ClientDetailsPropsType = {

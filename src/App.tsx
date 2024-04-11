@@ -16,6 +16,13 @@ function App() {
   const clients = useSelector<AppRootState, Array<ClientType>>(state => state.clients)
   const doctors = useSelector<AppRootState, Array<DoctorType>>(state => state.doctors)
 
+  const tableStyles = {
+    maxWidth: "calc(100% - 150px)", // Убедитесь, что ширина таблицы учитывает ширину navbar
+    marginLeft: "150px", // Отступ слева, равный ширине navbar
+    boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
+    borderRadius: "10px",
+    overflow: "hidden"
+  }
   const getClientById = (clientId: number): ClientType | null => {
     return clients.find((tl) => tl.id === clientId) || null;
   };
@@ -34,8 +41,8 @@ function App() {
         <Routes>
       
           <Route path="/test" element={<DoctorsTable doctors={doctors}/>} />
-          <Route path="/doctors" element={<ListDoctors doctors={doctors} />} />
-          <Route path="/clients" element={<ListClients clients={clients} />} />
+          <Route path="/doctors" element={<ListDoctors doctors={doctors} tableStyles={tableStyles}/>} />
+          <Route path="/clients" element={<ListClients clients={clients} tableStyles={tableStyles}/>} />
           <Route path="clients/:id" element={<ClientDetails getClientById={getClientById} />} />
           <Route path="doctors/:id" element={<DoctorDetails getDoctorById={getDoctorById} />} />
         </Routes>

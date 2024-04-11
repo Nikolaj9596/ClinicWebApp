@@ -8,7 +8,8 @@ const initState: Array<DoctorType> = [
     "middleName": "Иванович",
     "profession": { "id": 1, "name": "Стоматолог" },
     "dateStartWork": "2020-10-11",
-    "dateBirthday": "1990-10-11"
+    "dateBirthday": "1990-10-11",
+    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@ const initState: Array<DoctorType> = [
     "middleName": "Иванович",
     "profession": { "id": 1, "name": "Стоматолог" },
     "dateStartWork": "2020-10-11",
-    "dateBirthday": "1990-10-11"
+    "dateBirthday": "1990-10-11",
+    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
   },
   {
     "id": 3,
@@ -26,7 +28,8 @@ const initState: Array<DoctorType> = [
     "middleName": "Иванович",
     "profession": { "id": 1, "name": "Стоматолог" },
     "dateStartWork": "2020-10-11",
-    "dateBirthday": "1990-10-11"
+    "dateBirthday": "1990-10-11",
+    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
   },
   {
     "id": 4,
@@ -35,7 +38,8 @@ const initState: Array<DoctorType> = [
     "middleName": "Иванович",
     "profession": { "id": 1, "name": "Стоматолог" },
     "dateStartWork": "2020-10-11",
-    "dateBirthday": "1990-10-11"
+    "dateBirthday": "1990-10-11",
+    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
   }
 
 ]

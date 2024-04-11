@@ -9,7 +9,8 @@ const initState: Array<ClientType> = [
     "lastName": "Петров",
     "middleName": "Иванович",
     "dateBirthday": "1990-10-11",
-    "address": "Московская обл. Москва г."
+    "address": "Московская обл. Москва г.",
+    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@ const initState: Array<ClientType> = [
     "lastName": "Петров",
     "middleName": "Иванович",
     "dateBirthday": "1990-10-11",
-    "address": "Московская обл. Москва г."
+    "address": "Московская обл. Москва г.",
+    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
   },
   {
     "id": 3,
@@ -25,7 +27,8 @@ const initState: Array<ClientType> = [
     "lastName": "Петров",
     "middleName": "Иванович",
     "dateBirthday": "1990-10-11",
-    "address": "Московская обл. Москва г."
+    "address": "Московская обл. Москва г.",
+    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
   }
 ]
 

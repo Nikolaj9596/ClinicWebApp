@@ -27,13 +27,7 @@ const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
   return (
     <TableContainer
       component={Paper}
-      sx={{
-        maxWidth: "calc(100% - 150px)", // Убедитесь, что ширина таблицы учитывает ширину navbar
-        marginLeft: "150px", // Отступ слева, равный ширине navbar
-        boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
-        borderRadius: "10px",
-        overflow: "hidden"
-      }}
+      sx={props.tableStyles}
     >
       <Table aria-label="simple table">
         <TableHead>
@@ -48,15 +42,15 @@ const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
         <TableBody>
           {props.doctors.map((doctor) => (
             <TableRow key={doctor.id} hover style={{ cursor: 'pointer' }} onClick={() => handleRowClick(doctor.id)} >
-              {/* <TableCell> */}
-              {/*   <Box sx={{ display: 'flex', alignItems: 'center' }}> */}
-              {/*     <Avatar src={doctor.avatar} alt={${doctor.firstName} ${doctor.lastName}} /> */}
-              {/*     <Box sx={{ ml: 2 }}> */}
-              {/*       <Typography variant="button">{doctor.firstName} {doctor.lastName}</Typography> */}
-              {/*       <Typography variant="caption">{doctor.profession.name}</Typography> */}
-              {/*     </Box> */}
-              {/*   </Box> */}
-              {/* </TableCell> */}
+              <TableCell>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Avatar src={doctor.avatar} alt={`${doctor.firstName} ${doctor.lastName}`} />
+                  {/* <Box sx={{ ml: 2 }}> */}
+                  {/*   <Typography variant="button">{doctor.firstName} {doctor.lastName}</Typography> */}
+                  {/*   <Typography variant="caption">{doctor.profession.name}</Typography> */}
+                  {/* </Box> */}
+                </Box>
+              </TableCell>
               <TableCell>{doctor.lastName}</TableCell>
               <TableCell>{doctor.firstName}</TableCell>
               <TableCell>{doctor.middleName}</TableCell>

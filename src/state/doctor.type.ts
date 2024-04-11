@@ -1,4 +1,5 @@
 import React from 'react';
+import { TableStylesType } from './core.type';
 
 export type DoctorType = {
   id: number;
@@ -8,10 +9,12 @@ export type DoctorType = {
   profession: { id: number, name: string };
   dateBirthday: string;
   dateStartWork: string;
+  avatar: string;
 };
 
 export type ListDoctorsProps = {
   doctors: Array<DoctorType>
+  tableStyles: TableStylesType
 }
 
 export type DoctorDetailsPropsType = {
