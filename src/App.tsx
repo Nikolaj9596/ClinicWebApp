@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -7,7 +6,7 @@ import ListClients from './comonents/ListClients/ListClients';
 import { DoctorDetails } from './comonents/ListDoctors/DoctorDetails/DoctorDetails';
 import ListDoctors from './comonents/ListDoctors/ListDoctors';
 import NavBar from './comonents/NavBar/NavBar';
-import Sidebar from './comonents/NavBar/NewNavBar';
+import { DoctorsTable } from './comonents/NavBar/TableTest';
 import { ClientType } from './state/client.type';
 import { DoctorType } from './state/doctor.type';
 import { AppRootState } from './state/store';
@@ -34,6 +33,7 @@ function App() {
       <div className="content">
         <Routes>
       
+          <Route path="/test" element={<DoctorsTable doctors={doctors}/>} />
           <Route path="/doctors" element={<ListDoctors doctors={doctors} />} />
           <Route path="/clients" element={<ListClients clients={clients} />} />
           <Route path="clients/:id" element={<ClientDetails getClientById={getClientById} />} />

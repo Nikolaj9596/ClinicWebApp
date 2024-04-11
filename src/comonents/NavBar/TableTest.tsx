@@ -1,5 +1,4 @@
-import React from "react";
-import "./ListDoctors.css";
+import React from 'react';
 import {
   Avatar,
   Box,
@@ -12,11 +11,26 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-import { useNavigate } from "react-router-dom";
-import { ListDoctorsProps } from "../../state/doctor.type";
+import { useNavigate } from 'react-router-dom';
+import { calculateAge } from '../../utils';
 
-const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
+// Обновленный тип DoctorType с полем avatar
+export type DoctorType = {
+  id: number;
+  lastName: string;
+  firstName: string;
+  middleName: string;
+  profession: { id: number; name: string };
+  dateBirthday: string;
+  dateStartWork: string;
+  // avatar: string; // Путь к аватарке
+};
 
+type DoctorsTableProps = {
+  doctors: DoctorType[];
+};
+
+export const DoctorsTable: React.FC<DoctorsTableProps> = ({ doctors }) => {
   const navigate = useNavigate(); // Хук для навигации
 
   // Обработчик клика по строке таблицы
@@ -46,8 +60,8 @@ const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.doctors.map((doctor) => (
-            <TableRow key={doctor.id} hover style={{ cursor: 'pointer' }} onClick={() => handleRowClick(doctor.id)} >
+          {doctors.map((doctor) => (
+            <TableRow key={doctor.id} hover style={{ cursor: 'pointer' }}  onClick={() => handleRowClick(doctor.id)} >
               {/* <TableCell> */}
               {/*   <Box sx={{ display: 'flex', alignItems: 'center' }}> */}
               {/*     <Avatar src={doctor.avatar} alt={${doctor.firstName} ${doctor.lastName}} /> */}
@@ -69,4 +83,4 @@ const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
   );
 };
 
-export default ListDoctors;
+export default DoctorsTable;

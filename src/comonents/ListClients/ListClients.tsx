@@ -1,66 +1,66 @@
 import React from "react";
 import "./ListClients.css"
-import { DataGrid, GridColDef, GridRowParams } from '@mui/x-data-grid';
 import { ListClientsProps } from "../../state/client.type";
 import { useNavigate } from "react-router-dom";
-
-const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'Имя', width: 130 },
-  { field: 'lastName', headerName: 'Фамилия', width: 130 },
-  {
-    field: 'middleName',
-    headerName: 'Отество',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-  },
-  {
-    field: 'dateBirthday',
-    headerName: 'Дата рождения',
-    type: 'number',
-    width: 90,
-  },
-  {
-    field: 'address',
-    headerName: 'Адрес',
-    width: 400,
-  },
-];
-
+import {
+  Avatar,
+  Box,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography
+} from '@mui/material';
 
 const ListClients: React.FC<ListClientsProps> = (props) => {
-
-  const navigate = useNavigate();
-
-  const handleRowClick = (param: GridRowParams) => {
-    navigate(`/clients/${param.id}`);
+  const navigate = useNavigate(); // Хук для навигации
+  const handleRowClick = (clientId: number) => {
+    navigate(`/clients/${clientId}`);
   };
 
-  const rows = props.clients.map((client) => ({
-    id: client.id,
-    lastName: client.lastName,
-    firstName: client.firstName,
-    middleName: client.middleName,
-    address: client.address,
-    dateBirthday: client.dateBirthday
-  }))
   return (
-    <div className='table'>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        getRowId={(row) => row.id}
-        onRowClick={handleRowClick}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-        pageSizeOptions={[5, 10]}
-        checkboxSelection
-      />
-    </div>
+    <TableContainer
+      component={Paper}
+      sx={{
+        maxWidth: "calc(100% - 150px)", // Убедитесь, что ширина таблицы учитывает ширину navbar
+        marginLeft: "150px", // Отступ слева, равный ширине navbar
+        boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
+        borderRadius: "10px",
+        overflow: "hidden"
+      }}
+    >
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            {/* <TableCell></TableCell>  */}
+            <TableCell>Фамилия</TableCell>
+            <TableCell>Имя</TableCell>
+            <TableCell>Отчество</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {props.clients.map((client) => (
+            <TableRow key={client.id} hover style={{ cursor: 'pointer' }}  onClick={() => handleRowClick(client.id)} >
+              {/* <TableCell> */}
+              {/*   <Box sx={{ display: 'flex', alignItems: 'center' }}> */}
+              {/*     <Avatar src={client.avatar} alt={${doctor.firstName} ${doctor.lastName}} /> */}
+              {/*     <Box sx={{ ml: 2 }}> */}
+              {/*       <Typography variant="button">{client.firstName} {doctor.lastName}</Typography> */}
+              {/*       <Typography variant="caption">{client.profession.name}</Typography> */}
+              {/*     </Box> */}
+              {/*   </Box> */}
+              {/* </TableCell> */}
+              <TableCell>{client.lastName}</TableCell>
+              <TableCell>{client.firstName}</TableCell>
+              <TableCell>{client.middleName}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

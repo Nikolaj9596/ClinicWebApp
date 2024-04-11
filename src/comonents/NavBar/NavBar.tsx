@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   Drawer,
   List,
@@ -8,12 +9,12 @@ import {
   Divider,
   Box,
   Typography,
-  Icon
 } from '@mui/material';
 import MasksIcon from '@mui/icons-material/Masks';
 import GroupsIcon from '@mui/icons-material/Groups';
 import "./NavBar.css";
 import { NavLink } from 'react-router-dom';
+
 
 const NavBar: React.FC = () => {
   return (
@@ -53,16 +54,40 @@ const NavBar: React.FC = () => {
       </Box>
       <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.12)' }} />
       <List>
-        <ListItem button component={NavLink} to="/doctors">
+        <ListItem sx={{
+          color: 'rgba(255, 255, 255, 0.87)',
+          borderRadius: 1.5,
+          marginBottom: 0.5,
+          '&.active': {
+            color: 'rgba(255, 255, 255, 0.87)',
+            backgroundColor: '#328BED',
+          },
+          '&:hover': {
+            color: 'rgba(255, 255, 255, 0.87)',
+            backgroundColor: '#35373b', // Цвет при наведении
+          },
+        }} button component={NavLink} to="/doctors">
           <ListItemIcon>
-            {/* <Icon sx={{ color: 'rgba(255, 255, 255, 0.87)' }}>Врачи</Icon> */}
             <MasksIcon sx={{ color: 'rgba(255, 255, 255, 0.87)' }} />
           </ListItemIcon>
           <ListItemText primary="Врачи" />
         </ListItem>
-        <ListItem button component={NavLink} to="/clients">
+
+        <ListItem sx={{
+          color: 'rgba(255, 255, 255, 0.87)',
+          borderRadius: 1.5,
+          marginBottom: 0.5,
+          '&.active': {
+            color: 'rgba(255, 255, 255, 0.87)',
+            backgroundColor: '#328BED',
+          },
+          '&:hover': {
+            color: 'rgba(255, 255, 255, 0.87)',
+            backgroundColor: '#35373b', // Цвет при наведении
+          },
+        }} button component={NavLink} to="/clients">
           <ListItemIcon>
-            <GroupsIcon sx={{ color: 'rgba(255, 255, 255, 0.87)' }}/>
+            <GroupsIcon sx={{ color: 'rgba(255, 255, 255, 0.87)' }} />
           </ListItemIcon>
           <ListItemText primary="Клиенты" />
         </ListItem>
