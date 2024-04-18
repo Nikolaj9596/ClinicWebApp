@@ -1,6 +1,3 @@
-import React from 'react'
-import { TableStylesType } from './core.type';
-
 export enum Actions {
   removeClientByIdAction = "REMOVE_CLIENT_BY_ID"
 }
@@ -16,10 +13,17 @@ export type ClientType = {
 
 }
 
+export type ClientShortType = {
+  id: number;
+  lastName: string;
+  firstName: string;
+  middleName: string;
+  avatar: string;
+
+}
 // Props
 export type ListClientsProps = {
   clients: Array<ClientType>,
-  tableStyles: TableStylesType
 }
 
 export type ClientDetailsPropsType = {
@@ -33,3 +37,4 @@ export type RemoveClientByIdActionType = {
 }
 
 export type ClientReducerActionType = RemoveClientByIdActionType 
+

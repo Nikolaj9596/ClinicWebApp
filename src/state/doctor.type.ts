@@ -1,5 +1,3 @@
-import React from 'react';
-import { TableStylesType } from './core.type';
 
 export type DoctorType = {
   id: number;
@@ -12,13 +10,23 @@ export type DoctorType = {
   avatar: string;
 };
 
+
+export type DoctorShortType = {
+  id: number;
+  lastName: string;
+  firstName: string;
+  middleName: string;
+  profession: { id: number, name: string };
+  avatar: string;
+};
+
 export type ListDoctorsProps = {
   doctors: Array<DoctorType>
-  tableStyles: TableStylesType
 }
 
+
 export type DoctorDetailsPropsType = {
-  getDoctorById: (doctorId: number) => DoctorType | null
+  getDoctorById: (doctorId: number) => DoctorType | null;
 }
 
 // Actions

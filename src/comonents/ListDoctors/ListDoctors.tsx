@@ -19,11 +19,11 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import { tableStyles } from "../../styles";
 const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
 
   const navigate = useNavigate(); // Хук для навигации
 
-  // Обработчик клика по строке таблицы
   const handleVisibilityDetail = (doctorId: number) => {
     navigate(`/doctors/${doctorId}`);
   };
@@ -34,7 +34,6 @@ const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
   };
 
   const handleEdit = (doctorId: number) => {
-    // Навигация к странице редактирования доктора
     navigate(`/doctors/edit/${doctorId}`);
   };
 
@@ -44,7 +43,7 @@ const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
   return (
     <TableContainer
       component={Paper}
-      sx={props.tableStyles}
+      sx={tableStyles}
     >
       <Table aria-label="simple table">
         <TableHead>

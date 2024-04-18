@@ -12,8 +12,11 @@ import {
 } from '@mui/material';
 import MasksIcon from '@mui/icons-material/Masks';
 import GroupsIcon from '@mui/icons-material/Groups';
+import CoronavirusIcon from '@mui/icons-material/Coronavirus';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import "./NavBar.css";
 import { NavLink } from 'react-router-dom';
+import { listItemStyles } from '../../styles';
 
 
 const NavBar: React.FC = () => {
@@ -54,42 +57,33 @@ const NavBar: React.FC = () => {
       </Box>
       <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.12)' }} />
       <List>
-        <ListItem sx={{
-          color: 'rgba(255, 255, 255, 0.87)',
-          borderRadius: 1.5,
-          marginBottom: 0.5,
-          '&.active': {
-            color: 'rgba(255, 255, 255, 0.87)',
-            backgroundColor: '#328BED',
-          },
-          '&:hover': {
-            color: 'rgba(255, 255, 255, 0.87)',
-            backgroundColor: '#35373b', // Цвет при наведении
-          },
-        }} button component={NavLink} to="/doctors">
+        <ListItem sx={listItemStyles} button component={NavLink} to="/doctors">
           <ListItemIcon>
             <MasksIcon sx={{ color: 'rgba(255, 255, 255, 0.87)' }} />
           </ListItemIcon>
           <ListItemText primary="Врачи" />
         </ListItem>
 
-        <ListItem sx={{
-          color: 'rgba(255, 255, 255, 0.87)',
-          borderRadius: 1.5,
-          marginBottom: 0.5,
-          '&.active': {
-            color: 'rgba(255, 255, 255, 0.87)',
-            backgroundColor: '#328BED',
-          },
-          '&:hover': {
-            color: 'rgba(255, 255, 255, 0.87)',
-            backgroundColor: '#35373b', // Цвет при наведении
-          },
-        }} button component={NavLink} to="/clients">
+        <ListItem sx={listItemStyles} button component={NavLink} to="/clients">
           <ListItemIcon>
             <GroupsIcon sx={{ color: 'rgba(255, 255, 255, 0.87)' }} />
           </ListItemIcon>
           <ListItemText primary="Клиенты" />
+        </ListItem>
+
+
+        <ListItem sx={listItemStyles} button component={NavLink} to="/diseases">
+          <ListItemIcon>
+            <CoronavirusIcon sx={{ color: 'rgba(255, 255, 255, 0.87)' }} />
+          </ListItemIcon>
+          <ListItemText primary="Заболевания" />
+        </ListItem>
+
+        <ListItem sx={listItemStyles} button component={NavLink} to="/diagnosis">
+          <ListItemIcon>
+            <StickyNote2Icon sx={{ color: 'rgba(255, 255, 255, 0.87)' }} />
+          </ListItemIcon>
+          <ListItemText primary="Диагнозы" />
         </ListItem>
       </List>
     </Drawer>
