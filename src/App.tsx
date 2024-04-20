@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import ListAppointmentis from './comonents/ListAppointment/ListAppointment';
 import ClientDetails from './comonents/ListClients/ClientDetails/ClientDetails';
 import ListClients from './comonents/ListClients/ListClients';
 import DiagnosDetails from './comonents/ListDiagnosis/DiagnosDetail/DiagnosDetail';
@@ -11,6 +12,7 @@ import { DoctorDetails } from './comonents/ListDoctors/DoctorDetails/DoctorDetai
 import ListDoctors from './comonents/ListDoctors/ListDoctors';
 import NavBar from './comonents/NavBar/NavBar';
 import ClientProfilePage from './comonents/NavBar/TableTest';
+import { AppointmentType } from './state/appointment.type';
 import { ClientType } from './state/client.type';
 import { DiagnosType } from './state/diagnos.type';
 import { DiseaseType } from './state/disease.type';
@@ -23,6 +25,8 @@ function App() {
   const doctors = useSelector<AppRootState, Array<DoctorType>>(state => state.doctors)
   const diseases = useSelector<AppRootState, Array<DiseaseType>>(state => state.diseases)
   const diagnosis = useSelector<AppRootState, Array<DiagnosType>>(state => state.diagnosis)
+  const appointments = useSelector<AppRootState, Array<AppointmentType>>(state => state.appointments)
+
 
 
   const getClientById = (clientId: number): ClientType | null => {
@@ -53,6 +57,7 @@ function App() {
           <Route path="/clients" element={<ListClients clients={clients} />} />
           <Route path="/diseases" element={<ListDiseases diseases={diseases} />} />
           <Route path="/diagnosis" element={<ListDiagnosis diagnosis={diagnosis} />} />
+          <Route path="/appointments" element={<ListAppointmentis appointments={appointments} />} />
           <Route path="/clients/:id" element={<ClientDetails getClientById={getClientById} />} />
           <Route path="/doctors/:id" element={<DoctorDetails getDoctorById={getDoctorById} />} />
           <Route path="/diseases/:id" element={<DiseaseDetails getDiseaseById={getDiseaseById} />} />

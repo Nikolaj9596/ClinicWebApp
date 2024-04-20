@@ -1,4 +1,6 @@
 import { combineReducers, createStore } from "redux";
+import { appointmentReducer } from "./appointment-reducer";
+import { AppointmentType } from "./appointment.type";
 import { clientReducer } from "./client-reducer";
 import { ClientType } from "./client.type";
 import { diagnosReducer } from "./diagnos-reducer";
@@ -12,14 +14,16 @@ let reducers = combineReducers({
   clients: clientReducer,
   doctors: doctorReducer,
   diseases: diseaseReducer,
-  diagnosis: diagnosReducer
+  diagnosis: diagnosReducer,
+  appointments: appointmentReducer
 })
 
 export type AppRootState = {
-  clients: Array<ClientType>,
-  doctors: Array<DoctorType>,
+  clients: Array<ClientType>
+  doctors: Array<DoctorType>
   diseases: Array<DiseaseType>
   diagnosis: Array<DiagnosType>
+  appointments: Array<AppointmentType>
 }
 
 export const sotore = createStore(reducers);

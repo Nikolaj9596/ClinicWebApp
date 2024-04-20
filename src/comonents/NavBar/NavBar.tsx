@@ -14,6 +14,7 @@ import MasksIcon from '@mui/icons-material/Masks';
 import GroupsIcon from '@mui/icons-material/Groups';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import "./NavBar.css";
 import { NavLink } from 'react-router-dom';
 import { listItemStyles } from '../../styles';
@@ -84,6 +85,13 @@ const NavBar: React.FC = () => {
             <StickyNote2Icon sx={{ color: 'rgba(255, 255, 255, 0.87)' }} />
           </ListItemIcon>
           <ListItemText primary="Диагнозы" />
+        </ListItem>
+
+        <ListItem sx={listItemStyles} button component={NavLink} to="/appointments">
+          <MenuBookIcon>
+            <StickyNote2Icon sx={{ color: 'rgba(255, 255, 255, 0.87)' }} />
+          </MenuBookIcon>
+          <ListItemText primary="Записи на прием" sx={{paddingLeft: '30px'}}/>
         </ListItem>
       </List>
     </Drawer>
