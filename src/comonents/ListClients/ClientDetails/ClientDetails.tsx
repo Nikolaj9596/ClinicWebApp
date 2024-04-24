@@ -5,6 +5,7 @@ import "./ClientDetails.css"
 import { Box, Grid, Typography, Avatar, IconButton, styled, Paper } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddClientPopup from '../AddClientPopup/AddClientPopup';
 // import { StyledBox, StyledPaper } from '../../../utils';
 
 export const ClientDetails: React.FC<ClientDetailsPropsType> = (props) => {
@@ -12,7 +13,18 @@ export const ClientDetails: React.FC<ClientDetailsPropsType> = (props) => {
   const [client, setClient] = useState<ClientType | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate(); // Хук для навигации
+  const [openPopup, setOpenPopup] = useState(false); // Состояние для управления видимостью попапа
+  const [editingClient, setEditingClient] = useState<ClientType>(
+    {
+      "id": 0,
+      "lastName": "",
+      "firstName": "",
+      "middleName": "",
+      "dateBirthday": "",
+      "address": "",
+      "avatar": ""
+    }
+  );
 
   const StyledPaper = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(3),
@@ -60,16 +72,33 @@ export const ClientDetails: React.FC<ClientDetailsPropsType> = (props) => {
     return <div className="client-details-container"><p>Клиент не найден</p></div>;
   }
 
-  const handleClickDelete = (clientId: number) => {
-    console.log(`Deleting client with ID ${clientId}`);
+  const handleOpenPopup = (client: ClientType | null) => {
+    if (client !== null) {
+      setEditingClient(client)
+    }
+    setOpenPopup(true);
   };
 
-  const handleClickEdit = (clientId: number) => {
-    navigate(`/clients/edit/${clientId}`);
+  const handleClosePopup = () => {
+    setOpenPopup(false);
   };
+  
+  const handleAdd = (client: ClientType) => {
+    console.log("Заглушка")
+  };
+
   const fullName = `${client.lastName} ${client.firstName} ${client.middleName}`;
   return (
     <StyledPaper elevation={3}>
+
+
+      <AddClientPopup
+        open={openPopup}
+        handleClose={handleClosePopup}
+        handleAdd={handleAdd}
+        handleEdit={props.handleEditClient}
+        client={editingClient}
+      />
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Box
@@ -95,10 +124,10 @@ export const ClientDetails: React.FC<ClientDetailsPropsType> = (props) => {
         </Grid>
         <Grid item xs={12} md={2}> {/* Здесь xs, md, lg - это примерные значения и могут быть изменены в соответствии с вашими нуждами */}
           <StyledBox>
-            <IconButton onClick={() => handleClickEdit(client.id)} aria-label="edit">
+            <IconButton onClick={() => handleOpenPopup(client)} aria-label="edit">
               <CreateIcon color="warning" />
             </IconButton>
-            <IconButton onClick={() => handleClickDelete(client.id)} aria-label="delete">
+            <IconButton onClick={() => props.handleDeleteClient(client.id)} aria-label="delete">
               <DeleteIcon color="error" />
             </IconButton>
           </StyledBox>

@@ -1,4 +1,4 @@
-import { Actions, ClientReducerActionType, ClientType, RemoveClientByIdActionType } from "./client.type";
+import { Actions, AddClientActionType, ClientReducerActionType, ClientType, EditClientActionType, RemoveClientByIdActionType } from "./client.type";
 
 
 const initState: Array<ClientType> = [
@@ -33,7 +33,22 @@ const initState: Array<ClientType> = [
 
 
 export const clientReducer = (state: Array<ClientType> = initState, action: ClientReducerActionType): Array<ClientType> => {
+  console.log(action)
   switch (action.type) {
+    case (Actions.removeClientByIdAction):
+      return state.filter(c => c.id !== action.clientId)
+    case (Actions.addClientAction):
+      return [...state, action.client]
+    case Actions.editClientAction:
+      const isClientExist = state.find(client => client.id === action.client.id);
+      if (!isClientExist) {
+        return state;
+      }
+      return state.map(client =>
+        client.id === action.client.id
+          ? action.client
+          : client
+      )
     default:
       return state;
   }
@@ -43,4 +58,11 @@ export const removeClienByIdAC = (clientId: number): RemoveClientByIdActionType 
   return { type: Actions.removeClientByIdAction, clientId: clientId }
 }
 
+export const addClienAC = (client: ClientType): AddClientActionType => {
+  return { type: Actions.addClientAction, client: client }
+}
+
+export const editClienAC = (client: ClientType): EditClientActionType => {
+  return { type: Actions.editClientAction, client: client }
+}
 

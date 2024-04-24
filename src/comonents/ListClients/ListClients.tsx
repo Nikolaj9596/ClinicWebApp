@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ListClients.css"
 import { ListClientsProps } from "../../state/client.type";
 import { useNavigate } from "react-router-dom";
@@ -21,25 +21,37 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { tableStyles } from "../../styles";
- 
+import AddClientPopup from "./AddClientPopup/AddClientPopup";
+import { ClientType } from "../NavBar/TableTest";
+
 const ListClients: React.FC<ListClientsProps> = (props) => {
 
   const navigate = useNavigate(); // Хук для навигации
-
+  const [openPopup, setOpenPopup] = useState(false); // Состояние для управления видимостью попапа
+  const [editingClient, setEditingClient] = useState<ClientType>(
+    {
+      "id": 0,
+      "lastName": "",
+      "firstName": "",
+      "middleName": "",
+      "dateBirthday": "",
+      "address": "",
+      "avatar": ""
+    }
+  );
   const handleVisibilityDetail = (clientId: number) => {
     navigate(`/clients/${clientId}`);
   };
 
-  const handleDelete = (clientId: number) => {
-    console.log(`Deleting doctor with ID ${clientId}`);
+  const handleOpenPopup = (client: ClientType | null) => {
+    if (client !== null) {
+      setEditingClient(client)
+    }
+    setOpenPopup(true);
   };
 
-  const handleEdit = (clientId: number) => {
-    navigate(`/doctors/edit/${clientId}`);
-  };
-
-  const handleAddDoctor = () => {
-    navigate('/doctors/new'); // Предполагается, что '/doctors/new' ведёт на страницу добавления нового доктора.
+  const handleClosePopup = () => {
+    setOpenPopup(false);
   };
 
   return (
@@ -57,10 +69,17 @@ const ListClients: React.FC<ListClientsProps> = (props) => {
             <TableCell>
               Действия
               <Tooltip title="Добавить клиента" sx={{ alignItems: 'right' }}>
-                <IconButton color="primary" onClick={handleAddDoctor}>
+                <IconButton color="primary" onClick={() => handleOpenPopup(null)}>
                   <ControlPointIcon />
                 </IconButton>
               </Tooltip>
+              <AddClientPopup
+                open={openPopup}
+                handleClose={handleClosePopup}
+                handleAdd={props.handleAddClient}
+                handleEdit={props.handleEditClient}
+                client={editingClient}
+              />
             </TableCell>
           </TableRow>
         </TableHead>
@@ -75,19 +94,19 @@ const ListClients: React.FC<ListClientsProps> = (props) => {
               <TableCell>{client.lastName}</TableCell>
               <TableCell>{client.firstName}</TableCell>
               <TableCell>{client.middleName}</TableCell>
-                <TableCell align="center">
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <IconButton onClick={() => handleEdit(client.id)}>
-                      <CreateIcon color="warning" />
-                    </IconButton>
-                    <IconButton onClick={() => handleDelete(client.id)}>
-                      <DeleteIcon color="error" />
-                    </IconButton>
-                    <IconButton onClick={() => handleVisibilityDetail(client.id)}>
-                      <VisibilityIcon color="primary" />
-                    </IconButton>
-                  </Box>
-                </TableCell>
+              <TableCell align="center">
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <IconButton onClick={() => handleOpenPopup(client)}>
+                    <CreateIcon color="warning" />
+                  </IconButton>
+                  <IconButton onClick={() => props.handleDeleteClient(client.id)}>
+                    <DeleteIcon color="error" />
+                  </IconButton>
+                  <IconButton onClick={() => handleVisibilityDetail(client.id)}>
+                    <VisibilityIcon color="primary" />
+                  </IconButton>
+                </Box>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
