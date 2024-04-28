@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogTitle, TextField, Button, DialogActions } from '@mui/material';
 import './AddClientPopup.css'; // Здесь могут быть ваши стили для попапа
-import { ClientType } from '../../NavBar/TableTest';
 import { dialogStyles } from '../../../styles';
+import { ClientType } from '../../../state/client.type';
 
 type AddClientPopupProps = {
   open: boolean;

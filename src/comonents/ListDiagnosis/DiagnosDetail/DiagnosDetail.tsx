@@ -107,7 +107,7 @@ export const DiagnosDetails: React.FC<DiagnosDetailsPropsType> = (props) => {
             Связанные Заболевания
           </Typography>
           <List>
-            {diagnos?.disease.map((disease) => (
+            {diagnos?.diseases.map((disease) => (
               <ListItem key={disease.id}>
                 <ListItemText primary={disease.name} />
               </ListItem>

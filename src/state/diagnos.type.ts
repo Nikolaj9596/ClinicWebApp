@@ -1,11 +1,6 @@
-import { ClientShortType } from "./client.type";
-import { DiseaseShortType} from "./disease.type";
-import { DoctorShortType } from "./doctor.type";
-
-export enum Actions {
-  removeDiagnosByIdAction = "REMOVE_DIAGNOS_BY_ID"
-}
-
+import { ClientShortType, ClientType } from "./client.type";
+import { DiseaseShortType, DiseaseType } from "./disease.type";
+import { DoctorShortType, DoctorType } from "./doctor.type";
 
 export type DiagnosType = {
   id: number;
@@ -14,23 +9,63 @@ export type DiagnosType = {
   name: string;
   client: ClientShortType;
   doctor: DoctorShortType;
-  disease: Array<DiseaseShortType>
+  diseases: Array<DiseaseShortType>
 }
 
 // Props
 export type ListDiagnosisProps = {
-  diagnosis: Array<DiagnosType>,
+  diagnosis: Array<DiagnosType>
+  doctors: Array<DoctorType>
+  clients: Array<ClientType>
+  diseases: Array<DiseaseType>
+  handleAddDiagnos: (docktor: DiagnosType) => void
+  handleDeleteDiagnos: (docktorId: number) => void
+  handleEditDiagnos: (docktor: DiagnosType) => void
+  handleSearchDiagnos: (searchTerm: string) => void
 }
 
 export type DiagnosDetailsPropsType = {
+  doctors: Array<DoctorType>
+  clients: Array<ClientType>
+  diseases: Array<DiseaseType>
   getDiagnosById: (diagnosId: number) => DiagnosType | null
+  handleDeleteDiagnos: (docktorId: number) => void
+  handleEditDiagnos: (docktor: DiagnosType) => void
 }
 
 // Actions
+export enum DiagnosActions {
+  removeDiagnosByIdAction = "REMOVE_DIAGNOS_BY_ID",
+  addDiagnosAction = "ADD_DIAGNOS",
+  editDiagnosAction = "EDIT_DIAGNOS",
+  searchDiagnosAction = "SEARCH_DIAGNOS"
+}
+
 export type RemoveDiagnosByIdActionType = {
-  type: Actions.removeDiagnosByIdAction
+  type: DiagnosActions.removeDiagnosByIdAction
   diagnosId: number
 }
 
-export type DiagnosReducerActionType = RemoveDiagnosByIdActionType
+export type AddDiagnosActionType = {
+  type: DiagnosActions.addDiagnosAction
+  diagnos: DiagnosType
+}
+
+export type EditDiagnosActionType = {
+  type: DiagnosActions.editDiagnosAction
+  diagnos: DiagnosType
+}
+
+export type SearchDiagnosActionType = {
+  type: DiagnosActions.searchDiagnosAction
+  searchTerm: string
+}
+
+export type DiagnosReducerActionType = (
+  RemoveDiagnosByIdActionType
+  | AddDiagnosActionType
+  | EditDiagnosActionType
+  | SearchDiagnosActionType
+)
+
 

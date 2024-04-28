@@ -5,14 +5,26 @@ import { Box, Grid, Typography, Avatar, IconButton, styled, Paper } from '@mui/m
 import { calculateAge } from '../../../utils';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddDoctorPopup from '../AddDoctorPopup/AddDoctorPopup';
 
 export const DoctorDetails: React.FC<DoctorDetailsPropsType> = (props) => {
-  const { id } = useParams<{ id: string }>(); // используйте useParams для получения id из URL
+  const { id } = useParams<{ id: string }>();
   const [doctor, setdoctor] = useState<DoctorType | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate(); // Хук для навигации
-
+  const [openPopup, setOpenPopup] = useState(false);
+  const [editingDoctor, setEditingDoctor] = useState<DoctorType>(
+    {
+      "id": 0,
+      "lastName": "",
+      "firstName": "",
+      "middleName": "",
+      "dateBirthday": "",
+      "dateStartWork": "",
+      "profession": { "id": 0, "name": "" },
+      "avatar": ""
+    }
+  );
   const StyledPaper = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(3),
     borderRadius: 10,
@@ -27,9 +39,7 @@ export const DoctorDetails: React.FC<DoctorDetailsPropsType> = (props) => {
     padding: theme.spacing(2),
   }));
   useEffect(() => {
-    // Функция для загрузки данных о клиенте
     const loadDoctorDetails = async () => {
-      // Передаем id, приведенное к числу, в функцию для получения деталей клиента
       try {
         setLoading(true);
         const data = props.getDoctorById(Number(id));
@@ -58,17 +68,34 @@ export const DoctorDetails: React.FC<DoctorDetailsPropsType> = (props) => {
     return <p>Врач не найден</p>;
   }
 
-  const handleClickDelete = (doctorId: number) => {
-    navigate(`/doctors/${doctorId}/delete`);
+
+  const handleOpenPopup = (doctor: DoctorType | null) => {
+    if (doctor !== null) {
+      setEditingDoctor(doctor)
+    }
+    setOpenPopup(true);
   };
 
-  const handleClickEdit = (doctorId: number) => {
-    navigate(`/doctors/${doctorId}/edit`);
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
+
+  const handleAdd = (doctor: DoctorType) => {
+    console.log("Заглушка")
   };
 
   const fullName = `${doctor.lastName} ${doctor.firstName} ${doctor.middleName}`;
   return (
     <StyledPaper elevation={3}>
+
+      <AddDoctorPopup
+        open={openPopup}
+        handleClose={handleClosePopup}
+        handleAdd={handleAdd}
+        handleEdit={props.handleEditDoctor}
+        doctor={editingDoctor}
+        professions={props.professions}
+      />
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Box
@@ -97,10 +124,10 @@ export const DoctorDetails: React.FC<DoctorDetailsPropsType> = (props) => {
         </Grid>
         <Grid item xs={12} md={2}> {/* Здесь xs, md, lg - это примерные значения и могут быть изменены в соответствии с вашими нуждами */}
           <StyledBox>
-            <IconButton onClick={() => handleClickEdit(doctor.id)} aria-label="edit">
+            <IconButton onClick={() => handleOpenPopup(doctor)} aria-label="edit">
               <CreateIcon color="warning" />
             </IconButton>
-            <IconButton onClick={() => handleClickDelete(doctor.id)} aria-label="delete">
+            <IconButton onClick={() => props.handleDeleteDoctor(doctor.id)} aria-label="delete">
               <DeleteIcon color="error" />
             </IconButton>
           </StyledBox>

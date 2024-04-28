@@ -1,9 +1,3 @@
-export enum Actions {
-  removeClientByIdAction = "REMOVE_CLIENT_BY_ID",
-  addClientAction = "ADD_CLIENT",
-  editClientAction = "EDIT_CLIENT"
-}
-
 export type ClientType = {
   id: number;
   lastName: string;
@@ -28,6 +22,7 @@ export type ListClientsProps = {
   handleAddClient: (client: ClientType) => void,
   handleDeleteClient: (clientId: number) => void
   handleEditClient: (client: ClientType) => void
+  handleSearchClient: (searchTerm: string) => void
 }
 
 export type ClientDetailsPropsType = {
@@ -37,6 +32,14 @@ export type ClientDetailsPropsType = {
 }
 
 // Actions
+
+export enum Actions {
+  removeClientByIdAction = "REMOVE_CLIENT_BY_ID",
+  addClientAction = "ADD_CLIENT",
+  editClientAction = "EDIT_CLIENT",
+  searchClientAction = "SEARCH_CLIENT"
+}
+
 export type RemoveClientByIdActionType = {
   type: Actions.removeClientByIdAction
   clientId: number
@@ -52,5 +55,15 @@ export type EditClientActionType = {
   client: ClientType
 }
 
-export type ClientReducerActionType = RemoveClientByIdActionType | AddClientActionType | EditClientActionType
+export type SearchClientActionType = {
+  type: Actions.searchClientAction
+  searchTerm: string
+}
+
+export type ClientReducerActionType = (
+  RemoveClientByIdActionType
+  | AddClientActionType
+  | EditClientActionType
+  | SearchClientActionType
+)
 

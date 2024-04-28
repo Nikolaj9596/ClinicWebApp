@@ -23,7 +23,7 @@ export const listItemStyles = {
 
 export const dialogStyles = {
   '& .MuiDialog-paper': {
-    borderRadius: '10px', // Закругление углов
+    borderRadius: '10px', // Закругление угловsty
     boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)', // Тени
     '& .MuiDialogTitle-root': {
       textAlign: 'center', // Заголовок по центру
@@ -33,3 +33,11 @@ export const dialogStyles = {
     },
   },
 }
+
+export const searchBoxStyles = {
+  maxWidth: "calc(100% - 150px)",
+  marginLeft: "150px",
+  boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
+  borderRadius: "10px",
+  marginBottom: "20px", // Добавьте небольшой отступ снизу, если нужно
+};

@@ -1,4 +1,4 @@
-import { Actions, DiagnosReducerActionType, DiagnosType, RemoveDiagnosByIdActionType } from "./diagnos.type";
+import { AddDiagnosActionType, DiagnosActions, DiagnosReducerActionType, DiagnosType, EditDiagnosActionType, RemoveDiagnosByIdActionType, SearchDiagnosActionType } from "./diagnos.type";
 
 
 const initState: Array<DiagnosType> = [
@@ -9,19 +9,19 @@ const initState: Array<DiagnosType> = [
     "client": {
       "id": 1,
       "firstName": "Владимир",
-      "lastName": "Петров",
+      "lastName": "Ветров",
       "middleName": "Иванович",
       "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
     },
-    "doctor":{
+    "doctor": {
       "id": 1,
       "firstName": "Владимир",
-      "lastName": "Петров",
+      "lastName": "Мальков",
       "middleName": "Иванович",
       "profession": { "id": 1, "name": "Стоматолог" },
       "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
     },
-    "disease": [
+    "diseases": [
       {
         "id": 1,
         "name": "Бронхит",
@@ -48,7 +48,7 @@ const initState: Array<DiagnosType> = [
       "middleName": "Иванович",
       "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
     },
-    "doctor":{
+    "doctor": {
       "id": 1,
       "firstName": "Владимир",
       "lastName": "Петров",
@@ -56,7 +56,7 @@ const initState: Array<DiagnosType> = [
       "profession": { "id": 1, "name": "Стоматолог" },
       "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
     },
-    "disease": [],
+    "diseases": [],
     "status": "active"
   },
   {
@@ -70,7 +70,7 @@ const initState: Array<DiagnosType> = [
       "middleName": "Иванович",
       "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
     },
-    "doctor":{
+    "doctor": {
       "id": 1,
       "firstName": "Владимир",
       "lastName": "Петров",
@@ -78,7 +78,7 @@ const initState: Array<DiagnosType> = [
       "profession": { "id": 1, "name": "Стоматолог" },
       "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
     },
-    "disease": [
+    "diseases": [
       {
         "id": 1,
         "name": "Бронхит",
@@ -91,13 +91,44 @@ const initState: Array<DiagnosType> = [
 
 export const diagnosReducer = (state: Array<DiagnosType> = initState, action: DiagnosReducerActionType): Array<DiagnosType> => {
   switch (action.type) {
+    case (DiagnosActions.removeDiagnosByIdAction):
+      return state.filter(c => c.id !== action.diagnosId)
+    case (DiagnosActions.addDiagnosAction):
+      return [...state, action.diagnos]
+    case DiagnosActions.editDiagnosAction:
+      const isDiagnosExist = state.find(diagnos => diagnos.id === action.diagnos.id);
+      if (!isDiagnosExist) {
+        return state;
+      }
+      return state.map(diagnos =>
+        diagnos.id === action.diagnos.id
+          ? action.diagnos
+          : diagnos
+      )
+    case (DiagnosActions.searchDiagnosAction):
+      if (action.searchTerm === "") {
+        return initState
+      }
+      return state.filter(c => c.name == action.searchTerm)
     default:
       return state;
   }
 }
 
 export const removeDiagnosByIdAC = (diagnosId: number): RemoveDiagnosByIdActionType => {
-  return { type: Actions.removeDiagnosByIdAction, diagnosId: diagnosId }
+  return { type: DiagnosActions.removeDiagnosByIdAction, diagnosId: diagnosId }
 }
 
+
+export const addDiagnosAC = (diagnos: DiagnosType): AddDiagnosActionType => {
+  return { type: DiagnosActions.addDiagnosAction, diagnos: diagnos }
+}
+
+export const editDiagnosAC = (diagnos: DiagnosType): EditDiagnosActionType => {
+  return { type: DiagnosActions.editDiagnosAction, diagnos: diagnos }
+}
+
+export const searchDiagnosAC = (searchTerm: string): SearchDiagnosActionType => {
+  return { type: DiagnosActions.searchDiagnosAction, searchTerm: searchTerm }
+}
 
