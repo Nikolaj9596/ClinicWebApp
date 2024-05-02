@@ -26,9 +26,9 @@ export type DoctorShortType = {
 export type ListDoctorsProps = {
   doctors: Array<DoctorType>
   professions: Array<ProfessionType>
-  handleAddDoctor: (docktor: DoctorType) => void
-  handleDeleteDoctor: (docktorId: number) => void
-  handleEditDoctor: (docktor: DoctorType) => void
+  handleAddDoctor: (doctor: DoctorType) => void
+  handleDeleteDoctor: (doctorId: number) => void
+  handleEditDoctor: (doctor: DoctorType) => void
   handleSearchDoctor: (searchTerm: string) => void
 }
 
@@ -36,8 +36,8 @@ export type ListDoctorsProps = {
 export type DoctorDetailsPropsType = {
   professions: Array<ProfessionType>
   getDoctorById: (doctorId: number) => DoctorType | null;
-  handleDeleteDoctor: (docktorId: number) => void
-  handleEditDoctor: (docktor: DoctorType) => void
+  handleDeleteDoctor: (doctorId: number) => void
+  handleEditDoctor: (doctor: DoctorType) => void
 }
 
 // Actions

@@ -12,12 +12,14 @@ import { DoctorDetails } from './comonents/ListDoctors/DoctorDetails/DoctorDetai
 import ListDoctors from './comonents/ListDoctors/ListDoctors';
 import NavBar from './comonents/NavBar/NavBar';
 import ClientProfilePage from './comonents/NavBar/TableTest';
+import { addAppointmentAC, editAppointmentAC, removeAppointmentByIdAC, searchAppointmentAC } from './state/appointment-reducer';
 import { AppointmentType } from './state/appointment.type';
 import { addClienAC, editClienAC, removeClienByIdAC, searchClientAC } from './state/client-reducer';
 import { ClientType } from './state/client.type';
 import { addDiagnosAC, removeDiagnosByIdAC, searchDiagnosAC } from './state/diagnos-reducer';
 import { DiagnosType } from './state/diagnos.type';
-import { DiseaseType } from './state/disease.type';
+import { addDiseaseAC, editDiseaseAC, removeDiseaseByIdAC, searchDiseaseAC } from './state/disease-reducer';
+import { CategoryDiseasesType, DiseaseType } from './state/disease.type';
 import { addDoctorAC, editDoctorAC, removeDoctorByIdAC, searchDoctorAC } from './state/doctor-reducer';
 import { DoctorType, ProfessionType } from './state/doctor.type';
 import { AppRootState } from './state/store';
@@ -34,9 +36,32 @@ const App = () => {
     { id: 2, name: 'Хирург' },
     { id: 3, name: 'Стомотолог' },
   ];
+  const categoryDiseases: Array<CategoryDiseasesType> = [
+    { id: 1, name: 'ОРВ' },
+    { id: 2, name: 'Храническое' },
+    { id: 3, name: 'Расператорное' },
+  ];
   const navigate = useNavigate(); // Хук для навигации
 
+  //Appointment
+  const handleAddAppointment = (appointment: AppointmentType): void => {
+    dispatch(addAppointmentAC(appointment))
+    navigate(`/appointments`); // Предполагается, что '/appointments/new' ведёт на страницу добавления нового доктора.
+  };
 
+  const handleDeleteAppointment = (appointmentId: number): void => {
+    dispatch(removeAppointmentByIdAC(appointmentId))
+    navigate(`/appointments`);
+  };
+
+  const handleEditAppointment = (appointment: AppointmentType): void => {
+    dispatch(editAppointmentAC(appointment))
+    navigate(`/appointments/${appointment.id}`);
+  };
+
+  const handleSearchAppointment = (searchTerm: string): void => {
+    dispatch(searchAppointmentAC(searchTerm))
+  };
   // Doctor
   const getDoctorById = (doctorId: number): DoctorType | null => {
     return doctors.find((tl) => tl.id === doctorId) || null;
@@ -61,8 +86,28 @@ const App = () => {
     dispatch(searchDoctorAC(searchTerm))
   };
 
+  //  DISEASE
   const getDiseaseById = (diseaseId: number): DiseaseType | null => {
     return diseases.find((tl) => tl.id === diseaseId) || null;
+  };
+
+  const handleAddDisease = (disease: DiseaseType): void => {
+    dispatch(addDiseaseAC(disease))
+    navigate(`/diseases`); 
+  };
+
+  const handleDeleteDisease = (diseaseId: number): void => {
+    dispatch(removeDiseaseByIdAC(diseaseId))
+    navigate(`/diseases`);
+  };
+
+  const handleEditDisease = (disease: DiseaseType): void => {
+    dispatch(editDiseaseAC(disease))
+    navigate(`/diseases/${disease.id}`);
+  };
+
+  const handleSearchDisease = (searchTerm: string): void => {
+    dispatch(searchDiseaseAC(searchTerm))
   };
 
   //  DIAGNOS
@@ -123,12 +168,12 @@ const App = () => {
           {/* <Route path="/test" element={<ClientProfilePage client={{ id: 1, lastName: 'Иванов', firstName: 'Иван', middleName: 'Иванович', dateBirthday: '01.01.1980', address: 'г. Москва, ул. Пушкина, д.1', avatar: 'url_to_avatar_image', }} />} /> */}
           <Route path="/doctors" element={<ListDoctors doctors={doctors} handleAddDoctor={handleAddDoctor} handleDeleteDoctor={handleDeleteDoctor} handleEditDoctor={handleEditDoctor} handleSearchDoctor={handleSearchDoctor} professions={professions} />} />
           <Route path="/clients" element={<ListClients clients={clients} handleAddClient={handleAddClient} handleDeleteClient={handleDeleteClient} handleEditClient={handleEditClient} handleSearchClient={handleSearchClient} />} />
-          <Route path="/diseases" element={<ListDiseases diseases={diseases} />} />
+          <Route path="/diseases" element={<ListDiseases diseases={diseases} handleAddDisease={handleAddDisease} handleEditDisease={handleEditDisease} handleSearchDisease={handleSearchDisease} handleDeleteDisease={handleDeleteDisease} categoryDiseases={categoryDiseases}/>} />
           <Route path="/diagnosis" element={<ListDiagnosis diagnosis={diagnosis} handleAddDiagnos={handleAddDiagnos} handleDeleteDiagnos={handleDeleteDiagnos} handleEditDiagnos={handleEditDiagnos} handleSearchDiagnos={handleSearchDiagnos} doctors={doctors} clients={clients} diseases={diseases} />} />
-          <Route path="/appointments" element={<ListAppointmentis appointments={appointments} />} />
+          <Route path="/appointments" element={<ListAppointmentis appointments={appointments} handleAddAppointment={handleAddAppointment} handleDeleteAppointment={handleDeleteAppointment} handleEditAppointment={handleEditAppointment} handleSearchAppointment={handleSearchAppointment} doctors={doctors} clients={clients}/>} />
           <Route path="/clients/:id" element={<ClientDetails getClientById={getClientById} handleDeleteClient={handleDeleteClient} handleEditClient={handleEditClient} />} />
           <Route path="/doctors/:id" element={<DoctorDetails getDoctorById={getDoctorById} handleDeleteDoctor={handleDeleteDoctor} handleEditDoctor={handleEditDoctor} professions={professions} />} />
-          <Route path="/diseases/:id" element={<DiseaseDetails getDiseaseById={getDiseaseById} />} />
+          <Route path="/diseases/:id" element={<DiseaseDetails getDiseaseById={getDiseaseById} handleAddDisease={handleAddDisease} handleEditDisease={handleEditDisease} handleDeleteDisease={handleDeleteDisease} categoryDiseases={categoryDiseases}/>} />
           <Route path="/diagnosis/:id" element={<DiagnosDetails getDiagnosById={getDiagnosById} handleDeleteDiagnos={handleDeleteDiagnos} handleEditDiagnos={handleEditDiagnos}  doctors={doctors} clients={clients} diseases={diseases}/>} />
         </Routes>
       </div>

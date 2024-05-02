@@ -6,13 +6,51 @@ import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import AddDiagnosPopup from '../AddDiagnosPopup/AddDiagnosPopup';
 
 export const DiagnosDetails: React.FC<DiagnosDetailsPropsType> = (props) => {
   const { id } = useParams<{ id: string }>(); // используйте useParams для получения id из URL
-  const [diagnos, setdiagnos] = useState<DiagnosType | null>(null);
+  const [diagnos, setDiagnos] = useState<DiagnosType | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate(); // Хук для навигации
+  const [openPopup, setOpenPopup] = useState(false);
+  const emptyDiagnos: DiagnosType = {
+    "id": 0,
+    "name": "",
+    "description": "",
+    "client": {
+      "id": 0,
+      "firstName": "",
+      "lastName": "",
+      "middleName": "",
+      "avatar": ""
+    },
+    "doctor": {
+      "id": 1,
+      "firstName": "",
+      "lastName": "",
+      "middleName": "",
+      "profession": { "id": 1, "name": "" },
+      "avatar": ""
+    },
+    "diseases": [
+      {
+        "id": 1,
+        "name": "",
+      },
+      {
+        "id": 2,
+        "name": "",
+      },
+      {
+        "id": 3,
+        "name": "",
+      },
+    ],
+    "status": "active"
+  }
+  const [editingDiagnos, setEditingDiagnos] = useState<DiagnosType>(emptyDiagnos);
 
   const StyledPaper = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(3),
@@ -33,7 +71,7 @@ export const DiagnosDetails: React.FC<DiagnosDetailsPropsType> = (props) => {
       try {
         setLoading(true);
         const data = props.getDiagnosById(Number(id));
-        setdiagnos(data);
+        setDiagnos(data);
         setLoading(false);
       } catch (e) {
         setError('Ошибка при загрузке данных о клиенте');
@@ -58,17 +96,35 @@ export const DiagnosDetails: React.FC<DiagnosDetailsPropsType> = (props) => {
     return <p>Врач не найден</p>;
   }
 
-  const handleClickDelete = (diagnosId: number) => {
-    navigate(`/diagnosis/${diagnosId}/delete`);
+
+  const handleOpenPopup = (diagnos: DiagnosType | null) => {
+    if (diagnos !== null) {
+      setEditingDiagnos(diagnos)
+    }
+    setOpenPopup(true);
   };
 
-  const handleClickEdit = (diagnosId: number) => {
-    navigate(`/diagnosis/${diagnosId}/edit`);
+  const handleClosePopup = () => {
+    setOpenPopup(false);
   };
 
+  const handleAdd = (diagnos: DiagnosType) => {
+    console.log(diagnos)
+  };
 
   return (
     <Paper elevation={3} sx={{ padding: 3, borderRadius: 10, boxShadow: 3, marginLeft: 15 }}>
+
+      <AddDiagnosPopup
+        open={openPopup}
+        handleClose={handleClosePopup}
+        handleAdd={handleAdd}
+        handleEdit={props.handleEditDiagnos}
+        diagnos={editingDiagnos}
+        doctors={props.doctors}
+        clients={props.clients}
+        diseases={props.diseases}
+      />
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           <Typography variant="h4" gutterBottom>
@@ -117,12 +173,14 @@ export const DiagnosDetails: React.FC<DiagnosDetailsPropsType> = (props) => {
         <Grid item xs={12} md={4}>
           <Grid item xs={12} md={4}>
             <StyledBox>
-              <IconButton onClick={() => handleClickEdit(diagnos.id)} aria-label="edit">
-                <CreateIcon color="primary" />
-              </IconButton>
-              <IconButton onClick={() => handleClickDelete(diagnos.id)} aria-label="delete">
-                <DeleteIcon color="secondary" />
-              </IconButton>
+              <StyledBox>
+                <IconButton onClick={() => handleOpenPopup(diagnos)} aria-label="edit">
+                  <CreateIcon color="warning" />
+                </IconButton>
+                <IconButton onClick={() => props.handleDeleteDiagnos(diagnos.id)} aria-label="delete">
+                  <DeleteIcon color="error" />
+                </IconButton>
+              </StyledBox>
             </StyledBox>
           </Grid>
         </Grid>

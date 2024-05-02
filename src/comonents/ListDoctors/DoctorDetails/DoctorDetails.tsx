@@ -9,7 +9,7 @@ import AddDoctorPopup from '../AddDoctorPopup/AddDoctorPopup';
 
 export const DoctorDetails: React.FC<DoctorDetailsPropsType> = (props) => {
   const { id } = useParams<{ id: string }>();
-  const [doctor, setdoctor] = useState<DoctorType | null>(null);
+  const [doctor, setDoctor] = useState<DoctorType | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [openPopup, setOpenPopup] = useState(false);
@@ -43,7 +43,7 @@ export const DoctorDetails: React.FC<DoctorDetailsPropsType> = (props) => {
       try {
         setLoading(true);
         const data = props.getDoctorById(Number(id));
-        setdoctor(data);
+        setDoctor(data);
         setLoading(false);
       } catch (e) {
         setError('Ошибка при загрузке данных о клиенте');
