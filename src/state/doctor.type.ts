@@ -45,7 +45,8 @@ export enum DoctorActions {
   removeDoctorByIdAction = "REMOVE_DOCTOR_BY_ID",
   addDoctorAction = "ADD_DOCTOR",
   editDoctorAction = "EDIT_DOCTOR",
-  searchDoctorAction = "SEARCH_DOCTOR"
+  searchDoctorAction = "SEARCH_DOCTOR",
+  getListDoctorsAction = "GET_LIST_DOCTORS_ACTION"
 }
 
 export type RemoveDoctorByIdActionType = {
@@ -68,10 +69,16 @@ export type SearchDoctorActionType = {
   searchTerm: string
 }
 
+export type GetListDoctorsActionType = {
+  type: DoctorActions.getListDoctorsAction
+  payload: Array<DoctorType>
+}
+
 export type DoctorReducerActionType = (
   RemoveDoctorByIdActionType
   | AddDoctorActionType
   | EditDoctorActionType
   | SearchDoctorActionType
+  | GetListDoctorsActionType
 )
 

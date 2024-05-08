@@ -1,34 +1,35 @@
+import { UnknownAction } from "redux";
 import { Actions, AddClientActionType, ClientReducerActionType, ClientType, EditClientActionType, RemoveClientByIdActionType, SearchClientActionType } from "./client.type";
 
 
-const initState: Array<ClientType> = [
-  {
-    "id": 1,
-    "firstName": "Владимир",
-    "lastName": "Васильев",
-    "middleName": "Иванович",
-    "dateBirthday": "1990-10-11",
-    "address": "Московская обл. Москва г.",
-    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  },
-  {
-    "id": 2,
-    "firstName": "Владимир",
-    "lastName": "Дудкин",
-    "middleName": "Иванович",
-    "dateBirthday": "1990-10-11",
-    "address": "Московская обл. Москва г.",
-    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  },
-  {
-    "id": 3,
-    "firstName": "Владимир",
-    "lastName": "Мальков",
-    "middleName": "Иванович",
-    "dateBirthday": "1990-10-11",
-    "address": "Московская обл. Москва г.",
-    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  }
+const initState: Array<ClientType> | [] = [
+  // {
+  //   "id": 1,
+  //   "firstName": "Владимир",
+  //   "lastName": "Васильев",
+  //   "middleName": "Иванович",
+  //   "dateBirthday": "1990-10-11",
+  //   "address": "Московская обл. Москва г.",
+  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+  // },
+  // {
+  //   "id": 2,
+  //   "firstName": "Владимир",
+  //   "lastName": "Дудкин",
+  //   "middleName": "Иванович",
+  //   "dateBirthday": "1990-10-11",
+  //   "address": "Московская обл. Москва г.",
+  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+  // },
+  // {
+  //   "id": 3,
+  //   "firstName": "Владимир",
+  //   "lastName": "Мальков",
+  //   "middleName": "Иванович",
+  //   "dateBirthday": "1990-10-11",
+  //   "address": "Московская обл. Москва г.",
+  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+  // }
 ]
 
 
@@ -49,8 +50,8 @@ export const clientReducer = (state: Array<ClientType> = initState, action: Clie
           : client
       )
     case (Actions.searchClientAction):
-      if (action.searchTerm === ""){
-        return initState 
+      if (action.searchTerm === "") {
+        return initState
       }
       return state.filter(c => c.lastName == action.searchTerm)
     default:

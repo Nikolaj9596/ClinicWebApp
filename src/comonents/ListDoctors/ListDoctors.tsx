@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ListDoctors.css";
 import {
   Avatar,
@@ -22,8 +22,28 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { tableStyles } from "../../styles";
 import SearchAndFilter from "../Search/Search";
 import AddDoctorPopup from "./AddDoctorPopup/AddDoctorPopup";
+import { useDispatch } from "react-redux";
+import { fetchDoctors } from "../../thunks/docker-thunk";
+import { getListDoctordAC } from "../../state/doctor-reducer";
+import { doctorAPI } from "../../api/doctor.api";
+
 const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const response = await doctorAPI.getListDoctors();
+        dispatch(getListDoctordAC(response.data));
+      } catch (error) {
+        console.error("Error fetching doctors", error);
+      }
+    };
+
+    fetchDoctors();
+  }, [dispatch]);
+
   const [openPopup, setOpenPopup] = useState(false);
   const [editingDoctor, setEditingDoctor] = useState<DoctorType>({
     id: 0,

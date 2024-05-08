@@ -1,46 +1,46 @@
-import { AddDoctorActionType, DoctorActions, DoctorReducerActionType, DoctorType, EditDoctorActionType, RemoveDoctorByIdActionType, SearchDoctorActionType } from "./doctor.type";
+import { AddDoctorActionType, DoctorActions, DoctorReducerActionType, DoctorType, EditDoctorActionType, GetListDoctorsActionType, RemoveDoctorByIdActionType, SearchDoctorActionType } from "./doctor.type";
 
-const initState: Array<DoctorType> = [
-  {
-    "id": 1,
-    "firstName": "Владимир",
-    "lastName": "Нестеров",
-    "middleName": "Иванович",
-    "profession": { "id": 1, "name": "Стоматолог" },
-    "dateStartWork": "2020-10-11",
-    "dateBirthday": "1990-10-11",
-    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  },
-  {
-    "id": 2,
-    "firstName": "Владимир",
-    "lastName": "Петров",
-    "middleName": "Иванович",
-    "profession": { "id": 1, "name": "Стоматолог" },
-    "dateStartWork": "2020-10-11",
-    "dateBirthday": "1990-10-11",
-    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  },
-  {
-    "id": 3,
-    "firstName": "Владимир",
-    "lastName": "Луц",
-    "middleName": "Иванович",
-    "profession": { "id": 1, "name": "Стоматолог" },
-    "dateStartWork": "2020-10-11",
-    "dateBirthday": "1990-10-11",
-    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  },
-  {
-    "id": 4,
-    "firstName": "Владимир",
-    "lastName": "Мишин",
-    "middleName": "Иванович",
-    "profession": { "id": 1, "name": "Стоматолог" },
-    "dateStartWork": "2020-10-11",
-    "dateBirthday": "1990-10-11",
-    "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  }
+const initState: Array<DoctorType> | [] = [
+  // {
+  //   "id": 1,
+  //   "firstName": "Владимир",
+  //   "lastName": "Нестеров",
+  //   "middleName": "Иванович",
+  //   "profession": { "id": 1, "name": "Стоматолог" },
+  //   "dateStartWork": "2020-10-11",
+  //   "dateBirthday": "1990-10-11",
+  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+  // },
+  // {
+  //   "id": 2,
+  //   "firstName": "Владимир",
+  //   "lastName": "Петров",
+  //   "middleName": "Иванович",
+  //   "profession": { "id": 1, "name": "Стоматолог" },
+  //   "dateStartWork": "2020-10-11",
+  //   "dateBirthday": "1990-10-11",
+  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+  // },
+  // {
+  //   "id": 3,
+  //   "firstName": "Владимир",
+  //   "lastName": "Луц",
+  //   "middleName": "Иванович",
+  //   "profession": { "id": 1, "name": "Стоматолог" },
+  //   "dateStartWork": "2020-10-11",
+  //   "dateBirthday": "1990-10-11",
+  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+  // },
+  // {
+  //   "id": 4,
+  //   "firstName": "Владимир",
+  //   "lastName": "Мишин",
+  //   "middleName": "Иванович",
+  //   "profession": { "id": 1, "name": "Стоматолог" },
+  //   "dateStartWork": "2020-10-11",
+  //   "dateBirthday": "1990-10-11",
+  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+  // }
 
 ]
 
@@ -65,6 +65,8 @@ export const doctorReducer = (state: Array<DoctorType> = initState, action: Doct
         return initState 
       }
       return state.filter(c => c.lastName == action.searchTerm)
+    case (DoctorActions.getListDoctorsAction):
+      return action.payload
     default:
       return state;
   }
@@ -86,5 +88,9 @@ export const editDoctorAC = (doctor: DoctorType): EditDoctorActionType => {
 
 export const searchDoctorAC = (searchTerm: string): SearchDoctorActionType => {
   return { type: DoctorActions.searchDoctorAction, searchTerm: searchTerm }
+}
+
+export const getListDoctordAC = (payload: Array<DoctorType>): GetListDoctorsActionType => {
+  return { type: DoctorActions.getListDoctorsAction, payload: payload }
 }
 
