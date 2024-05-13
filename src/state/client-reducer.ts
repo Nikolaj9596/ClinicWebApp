@@ -1,49 +1,47 @@
-import { UnknownAction } from "redux";
-import { Actions, AddClientActionType, ClientReducerActionType, ClientType, EditClientActionType, RemoveClientByIdActionType, SearchClientActionType } from "./client.type";
+import { clientAPI } from "../api/client.api";
+import { Actions, AddClientActionType, ClientReducerActionType, ClientType, EditClientActionType, GetListClientActionType, RemoveClientByIdActionType, SearchClientActionType } from "./client.type";
 
 
-const initState: Array<ClientType> | [] = [
-  // {
-  //   "id": 1,
-  //   "firstName": "Владимир",
-  //   "lastName": "Васильев",
-  //   "middleName": "Иванович",
-  //   "dateBirthday": "1990-10-11",
-  //   "address": "Московская обл. Москва г.",
-  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  // },
-  // {
-  //   "id": 2,
-  //   "firstName": "Владимир",
-  //   "lastName": "Дудкин",
-  //   "middleName": "Иванович",
-  //   "dateBirthday": "1990-10-11",
-  //   "address": "Московская обл. Москва г.",
-  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  // },
-  // {
-  //   "id": 3,
-  //   "firstName": "Владимир",
-  //   "lastName": "Мальков",
-  //   "middleName": "Иванович",
-  //   "dateBirthday": "1990-10-11",
-  //   "address": "Московская обл. Москва г.",
-  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  // }
-]
-
+const initState: Array<ClientType> | [] = []
 
 export const clientReducer = (state: Array<ClientType> = initState, action: ClientReducerActionType): Array<ClientType> => {
   switch (action.type) {
     case (Actions.removeClientByIdAction):
+      const deleteClient = async () => {
+        try {
+          await clientAPI.deleteClient(action.clientId);
+        } catch (error) {
+          console.error("Error create doctor", error);
+        }
+      };
+      deleteClient();
       return state.filter(c => c.id !== action.clientId)
+
     case (Actions.addClientAction):
+      const createClient = async () => {
+        try {
+          await clientAPI.createClient(action.client);
+        } catch (error) {
+          console.error("Error create client", error);
+        }
+      };
+      createClient();
       return [...state, action.client]
+
     case Actions.editClientAction:
       const isClientExist = state.find(client => client.id === action.client.id);
       if (!isClientExist) {
         return state;
       }
+
+      const editClient = async () => {
+        try {
+          await clientAPI.updateClient(action.client);
+        } catch (error) {
+          console.error("Error create client", error);
+        }
+      };
+      editClient();
       return state.map(client =>
         client.id === action.client.id
           ? action.client
@@ -54,6 +52,8 @@ export const clientReducer = (state: Array<ClientType> = initState, action: Clie
         return initState
       }
       return state.filter(c => c.lastName == action.searchTerm)
+    case (Actions.getListClientAction):
+      return action.payload
     default:
       return state;
   }
@@ -75,3 +75,6 @@ export const searchClientAC = (searchTerm: string): SearchClientActionType => {
   return { type: Actions.searchClientAction, searchTerm: searchTerm }
 }
 
+export const getListClientdAC = (payload: Array<ClientType>): GetListClientActionType => {
+  return { type: Actions.getListClientAction, payload: payload }
+}

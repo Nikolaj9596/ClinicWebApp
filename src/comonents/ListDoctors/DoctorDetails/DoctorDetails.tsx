@@ -6,6 +6,9 @@ import { calculateAge } from '../../../utils';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddDoctorPopup from '../AddDoctorPopup/AddDoctorPopup';
+import { professionAPI } from '../../../api/profession.api';
+import { getListProfessiondAC } from '../../../state/profession-reducer';
+import { useDispatch } from 'react-redux';
 
 export const DoctorDetails: React.FC<DoctorDetailsPropsType> = (props) => {
   const { id } = useParams<{ id: string }>();
@@ -13,6 +16,7 @@ export const DoctorDetails: React.FC<DoctorDetailsPropsType> = (props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [openPopup, setOpenPopup] = useState(false);
+  const dispatch = useDispatch();
   const [editingDoctor, setEditingDoctor] = useState<DoctorType>(
     {
       "id": 0,
@@ -25,6 +29,19 @@ export const DoctorDetails: React.FC<DoctorDetailsPropsType> = (props) => {
       "avatar": ""
     }
   );
+
+  useEffect(() => {
+    const fetchProfessions = async () => {
+      try {
+        const response = await professionAPI.getListProfessions();
+        dispatch(getListProfessiondAC(response.data));
+      } catch (error) {
+        console.error("Error fetching professions", error);
+      }
+    };
+    fetchProfessions();
+  }, [dispatch]);
+
   const StyledPaper = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(3),
     borderRadius: 10,

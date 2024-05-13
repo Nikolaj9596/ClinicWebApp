@@ -1,0 +1,99 @@
+{
+  "doctors": [
+    {
+      "id": 1,
+      "firstName": "Владимир",
+      "lastName": "Нестеров",
+      "middleName": "Иванович",
+      "profession": {
+        "id": 1,
+        "name": "Стоматолог"
+      },
+      "dateStartWork": "2020-10-11",
+      "dateBirthday": "1990-10-11",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+    },
+    {
+      "id": 2,
+      "firstName": "Владимир",
+      "lastName": "Петров",
+      "middleName": "Иванович",
+      "profession": {
+        "id": 1,
+        "name": "Стоматолог"
+      },
+      "dateStartWork": "2020-10-11",
+      "dateBirthday": "1990-10-11",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+    },
+    {
+      "id": 3,
+      "firstName": "Владимир",
+      "lastName": "Луц",
+      "middleName": "Иванович",
+      "profession": {
+        "id": 1,
+        "name": "Стоматолог"
+      },
+      "dateStartWork": "2020-10-11",
+      "dateBirthday": "1990-10-11",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+    },
+    {
+      "id": 4,
+      "firstName": "Владимир",
+      "lastName": "Мишин",
+      "middleName": "Иванович",
+      "profession": {
+        "id": 1,
+        "name": "Стоматолог"
+      },
+      "dateStartWork": "2020-10-11",
+      "dateBirthday": "1990-10-11",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+    }
+  ],
+  "professions": [
+    {
+      "id": 1,
+      "name": "Терапевт"
+    },
+    {
+      "id": 2,
+      "name": "Хирург"
+    },
+    {
+      "id": 3,
+      "name": "Стомотолог"
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "firstName": "Владимир",
+      "lastName": "Васильев",
+      "middleName": "Иванович",
+      "dateBirthday": "1990-10-11",
+      "address": "Московская обл. Москва г.",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+    },
+    {
+      "id": 2,
+      "firstName": "Владимир",
+      "lastName": "Дудкин",
+      "middleName": "Иванович",
+      "dateBirthday": "1990-10-11",
+      "address": "Московская обл. Москва г.",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+    },
+    {
+      "id": 3,
+      "firstName": "Владимир",
+      "lastName": "Мальков",
+      "middleName": "Иванович",
+      "dateBirthday": "1990-10-11",
+      "address": "Московская обл. Москва г.",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+    }
+  ]
+}

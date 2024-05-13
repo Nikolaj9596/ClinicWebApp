@@ -1,68 +1,55 @@
+import { doctorAPI } from "../api/doctor.api";
 import { AddDoctorActionType, DoctorActions, DoctorReducerActionType, DoctorType, EditDoctorActionType, GetListDoctorsActionType, RemoveDoctorByIdActionType, SearchDoctorActionType } from "./doctor.type";
 
-const initState: Array<DoctorType> | [] = [
-  // {
-  //   "id": 1,
-  //   "firstName": "Владимир",
-  //   "lastName": "Нестеров",
-  //   "middleName": "Иванович",
-  //   "profession": { "id": 1, "name": "Стоматолог" },
-  //   "dateStartWork": "2020-10-11",
-  //   "dateBirthday": "1990-10-11",
-  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  // },
-  // {
-  //   "id": 2,
-  //   "firstName": "Владимир",
-  //   "lastName": "Петров",
-  //   "middleName": "Иванович",
-  //   "profession": { "id": 1, "name": "Стоматолог" },
-  //   "dateStartWork": "2020-10-11",
-  //   "dateBirthday": "1990-10-11",
-  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  // },
-  // {
-  //   "id": 3,
-  //   "firstName": "Владимир",
-  //   "lastName": "Луц",
-  //   "middleName": "Иванович",
-  //   "profession": { "id": 1, "name": "Стоматолог" },
-  //   "dateStartWork": "2020-10-11",
-  //   "dateBirthday": "1990-10-11",
-  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  // },
-  // {
-  //   "id": 4,
-  //   "firstName": "Владимир",
-  //   "lastName": "Мишин",
-  //   "middleName": "Иванович",
-  //   "profession": { "id": 1, "name": "Стоматолог" },
-  //   "dateStartWork": "2020-10-11",
-  //   "dateBirthday": "1990-10-11",
-  //   "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-  // }
-
-]
+const initState: Array<DoctorType> | [] = []
 
 export const doctorReducer = (state: Array<DoctorType> = initState, action: DoctorReducerActionType) => {
   switch (action.type) {
+
     case (DoctorActions.removeDoctorByIdAction):
+      const deleteDoctor = async () => {
+        try {
+          await doctorAPI.deleteDoctor(action.doctorId);
+        } catch (error) {
+          console.error("Error create doctor", error);
+        }
+      };
+      deleteDoctor();
       return state.filter(c => c.id !== action.doctorId)
+
     case (DoctorActions.addDoctorAction):
+      const createDoctor = async () => {
+        try {
+          await doctorAPI.createDoctor(action.doctor);
+        } catch (error) {
+          console.error("Error create doctor", error);
+        }
+      };
+      createDoctor();
       return [...state, action.doctor]
+
     case DoctorActions.editDoctorAction:
       const isDoctorExist = state.find(doctor => doctor.id === action.doctor.id);
       if (!isDoctorExist) {
         return state;
       }
+      const editDoctor = async () => {
+        try {
+          await doctorAPI.updateDoctor(action.doctor);
+        } catch (error) {
+          console.error("Error create doctor", error);
+        }
+      };
+      editDoctor();
       return state.map(doctor =>
         doctor.id === action.doctor.id
           ? action.doctor
           : doctor
       )
+
     case (DoctorActions.searchDoctorAction):
-      if (action.searchTerm === ""){
-        return initState 
+      if (action.searchTerm === "") {
+        return initState
       }
       return state.filter(c => c.lastName == action.searchTerm)
     case (DoctorActions.getListDoctorsAction):
@@ -76,7 +63,6 @@ export const doctorReducer = (state: Array<DoctorType> = initState, action: Doct
 export const removeDoctorByIdAC = (doctorId: number): RemoveDoctorByIdActionType => {
   return { type: DoctorActions.removeDoctorByIdAction, doctorId: doctorId }
 }
-
 
 export const addDoctorAC = (doctor: DoctorType): AddDoctorActionType => {
   return { type: DoctorActions.addDoctorAction, doctor: doctor }

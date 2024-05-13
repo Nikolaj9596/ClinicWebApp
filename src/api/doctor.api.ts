@@ -24,15 +24,34 @@ export const doctorAPI = {
     return promise;
   },
   createDoctor(doctor: DoctorType) {
-    const promise = api.post<DoctorType>("doctors", doctor);
+    const doctorData = {
+      firstName: doctor.firstName,
+      lastName: doctor.lastName,
+      middleName: doctor.middleName,
+      avatar: doctor.avatar,
+      dateBirthday: doctor.dateBirthday,
+      dateStartWork: doctor.dateStartWork,
+      profession: doctor.profession.id
+    }
+    const promise = api.post<DoctorType>("/", doctorData);
     return promise;
   },
+
   deleteDoctor(doctorId: number) {
     const promise = api.delete(`/${doctorId}`);
     return promise;
   },
   updateDoctor(doctor: DoctorType) {
-    const promise = api.patch<DoctorType>(`/${doctor.id}`, doctor);
+    const doctorData = {
+      firstName: doctor.firstName,
+      lastName: doctor.lastName,
+      middleName: doctor.middleName,
+      avatar: doctor.avatar,
+      dateBirthday: doctor.dateBirthday,
+      dateStartWork: doctor.dateStartWork,
+      profession: doctor.profession.id
+    }
+    const promise = api.patch<DoctorType>(`/${doctor.id}`, doctorData);
     return promise;
   },
 };

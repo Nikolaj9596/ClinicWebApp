@@ -16,6 +16,7 @@ export type ClientShortType = {
   avatar: string;
 
 }
+
 // Props
 export type ListClientsProps = {
   clients: Array<ClientType>,
@@ -37,7 +38,8 @@ export enum Actions {
   removeClientByIdAction = "REMOVE_CLIENT_BY_ID",
   addClientAction = "ADD_CLIENT",
   editClientAction = "EDIT_CLIENT",
-  searchClientAction = "SEARCH_CLIENT"
+  searchClientAction = "SEARCH_CLIENT",
+  getListClientAction = "GET_LIST_CLIENT_ACTION"
 }
 
 export type RemoveClientByIdActionType = {
@@ -60,10 +62,17 @@ export type SearchClientActionType = {
   searchTerm: string
 }
 
+
+export type GetListClientActionType = {
+  type: Actions.getListClientAction
+  payload: Array<ClientType>
+}
+
 export type ClientReducerActionType = (
   RemoveClientByIdActionType
   | AddClientActionType
   | EditClientActionType
   | SearchClientActionType
+  | GetListClientActionType
 )
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ListClients.css"
 import { ListClientsProps } from "../../state/client.type";
 import { useNavigate } from "react-router-dom";
@@ -24,10 +24,14 @@ import { tableStyles } from "../../styles";
 import AddClientPopup from "./AddClientPopup/AddClientPopup";
 import { ClientType } from "../NavBar/TableTest";
 import SearchAndFilter from "../Search/Search";
+import { useDispatch } from "react-redux";
+import { clientAPI } from "../../api/client.api";
+import { getListClientdAC } from "../../state/client-reducer";
 
 const ListClients: React.FC<ListClientsProps> = (props) => {
 
   const navigate = useNavigate(); // Хук для навигации
+  const dispatch = useDispatch();
   const [openPopup, setOpenPopup] = useState(false); // Состояние для управления видимостью попапа
   const [editingClient, setEditingClient] = useState<ClientType>(
     {
@@ -54,6 +58,19 @@ const ListClients: React.FC<ListClientsProps> = (props) => {
   const handleClosePopup = () => {
     setOpenPopup(false);
   };
+
+
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const response = await clientAPI.getListClients();
+        dispatch(getListClientdAC(response.data));
+      } catch (error) {
+        console.error("Error fetching clients", error);
+      }
+    };
+    fetchClients();
+  }, [dispatch]);
 
   return (
     <>

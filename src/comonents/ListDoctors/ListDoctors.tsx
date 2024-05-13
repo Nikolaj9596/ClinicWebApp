@@ -23,9 +23,10 @@ import { tableStyles } from "../../styles";
 import SearchAndFilter from "../Search/Search";
 import AddDoctorPopup from "./AddDoctorPopup/AddDoctorPopup";
 import { useDispatch } from "react-redux";
-import { fetchDoctors } from "../../thunks/docker-thunk";
 import { getListDoctordAC } from "../../state/doctor-reducer";
 import { doctorAPI } from "../../api/doctor.api";
+import { professionAPI } from "../../api/profession.api";
+import { getListProfessiondAC } from "../../state/profession-reducer";
 
 const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
   const navigate = useNavigate();
@@ -38,6 +39,19 @@ const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
         dispatch(getListDoctordAC(response.data));
       } catch (error) {
         console.error("Error fetching doctors", error);
+      }
+    };
+
+    fetchDoctors();
+  }, [dispatch]);
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const response = await professionAPI.getListProfessions();
+        dispatch(getListProfessiondAC(response.data));
+      } catch (error) {
+        console.error("Error fetching professions", error);
       }
     };
 
