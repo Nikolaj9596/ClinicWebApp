@@ -1,4 +1,4 @@
-import { CategoryDiseasesActions, CategoryDiseasesReducerActionType, CategoryDiseasesType,  GetListCategoryDiseasesActionType } from "./category-disease.type";
+import { CategoryDiseasesActions, CategoryDiseasesReducerActionType, CategoryDiseasesType, GetListCategoryDiseasesActionType } from "./category-disease.type";
 
 const initState: Array<CategoryDiseasesType> | [] = []
 

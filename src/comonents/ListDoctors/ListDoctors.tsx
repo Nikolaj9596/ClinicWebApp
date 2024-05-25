@@ -42,11 +42,7 @@ const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
       }
     };
 
-    fetchDoctors();
-  }, [dispatch]);
-
-  useEffect(() => {
-    const fetchDoctors = async () => {
+    const fetchProfessions = async () => {
       try {
         const response = await professionAPI.getListProfessions();
         dispatch(getListProfessiondAC(response.data));
@@ -54,7 +50,7 @@ const ListDoctors: React.FC<ListDoctorsProps> = (props) => {
         console.error("Error fetching professions", error);
       }
     };
-
+    fetchProfessions();
     fetchDoctors();
   }, [dispatch]);
 

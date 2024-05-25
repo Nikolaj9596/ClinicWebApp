@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ListClients.css"
-import { ListClientsProps } from "../../state/client.type";
+import { ClientType, ListClientsProps } from "../../state/client.type";
 import { useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -22,14 +22,12 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import { tableStyles } from "../../styles";
 import AddClientPopup from "./AddClientPopup/AddClientPopup";
-import { ClientType } from "../NavBar/TableTest";
 import SearchAndFilter from "../Search/Search";
 import { useDispatch } from "react-redux";
 import { clientAPI } from "../../api/client.api";
 import { getListClientdAC } from "../../state/client-reducer";
 
 const ListClients: React.FC<ListClientsProps> = (props) => {
-
   const navigate = useNavigate(); // Хук для навигации
   const dispatch = useDispatch();
   const [openPopup, setOpenPopup] = useState(false); // Состояние для управления видимостью попапа

@@ -23,11 +23,12 @@ export const diseaseAPI = {
     const promise = api.get(`/${diseaseId}`);
     return promise;
   },
+
   createDisease(disease: DiseaseType) {
     const diseaseData = {
       description: disease.description,
       name: disease.name,
-      category_disease_id: disease.category_disease.id
+      categoryDisease: disease.categoryDisease.id
     }
     const promise = api.post<DiseaseType>("/", diseaseData);
     return promise;
@@ -42,7 +43,7 @@ export const diseaseAPI = {
     const diseaseData = {
       description: disease.description,
       name: disease.name,
-      category_disease_id: disease.category_disease.id
+      categoryDisease: disease.categoryDisease.id
     }
     const promise = api.patch<DiseaseType>(`/${disease.id}`, diseaseData);
     return promise;

@@ -7,7 +7,7 @@ export type DiseaseType = {
   id: number;
   description: string;
   name: string;
-  category_disease: CategoryDiseasesType;
+  categoryDisease: CategoryDiseasesType;
 }
 
 export type DiseaseShortType = {
@@ -38,7 +38,8 @@ export enum DiseaseActions {
   removeDiseaseByIdAction = "REMOVE_DISEASE_BY_ID",
   addDiseaseAction = "ADD_DISEASE",
   editDiseaseAction = "EDIT_DISEASE",
-  searchDiseaseAction = "SEARCH_DISEASE"
+  searchDiseaseAction = "SEARCH_DISEASE",
+  getListDiseaseAction = "GET_LIST_DISEASE"
 }
 
 export type RemoveDiseaseByIdActionType = {
@@ -61,11 +62,17 @@ export type SearchDiseaseActionType = {
   searchTerm: string
 }
 
+export type GetListDiseaseActionType = {
+  type: DiseaseActions.getListDiseaseAction
+  payload: Array<DiseaseType>
+}
+
 export type DiseaseReducerActionType = (
   RemoveDiseaseByIdActionType
   | AddDiseaseActionType
   | EditDiseaseActionType
   | SearchDiseaseActionType
+  | GetListDiseaseActionType
 )
 
 

@@ -11,7 +11,7 @@ export const doctorReducer = (state: Array<DoctorType> = initState, action: Doct
         try {
           await doctorAPI.deleteDoctor(action.doctorId);
         } catch (error) {
-          console.error("Error create doctor", error);
+          console.error("Error delete doctor", error);
         }
       };
       deleteDoctor();
@@ -37,7 +37,7 @@ export const doctorReducer = (state: Array<DoctorType> = initState, action: Doct
         try {
           await doctorAPI.updateDoctor(action.doctor);
         } catch (error) {
-          console.error("Error create doctor", error);
+          console.error("Error update doctor", error);
         }
       };
       editDoctor();
@@ -52,6 +52,7 @@ export const doctorReducer = (state: Array<DoctorType> = initState, action: Doct
         return initState
       }
       return state.filter(c => c.lastName == action.searchTerm)
+
     case (DoctorActions.getListDoctorsAction):
       return action.payload
     default:

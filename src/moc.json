@@ -95,5 +95,96 @@
       "address": "Московская обл. Москва г.",
       "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
     }
-  ]
+  ],
+  "disease": [
+    {
+      "id": 1,
+      "name": "Бронхит",
+      "description": "Полное описание по заболеванию Бронхит",
+      "category_disease": {
+        "id": 1,
+        "name": "Воздушно-капельное"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Астма",
+      "description": "Полное описание по заболеванию Бронхит",
+      "category_disease": {
+        "id": 1,
+        "name": "ORV"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Аргрит",
+      "description": "Полное описание по заболеванию Бронхит",
+      "category_disease": {
+        "id": 1,
+        "name": "Воздушно-капельное"
+      }
+    }
+  ],
+  "appointments": [
+
+  {
+    "id": 1,
+    "doctor": {
+      "id": 1,
+      "firstName": "Вадим",
+      "lastName": "Петров",
+      "middleName": "Васильев",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png",
+    },
+    "client": {
+
+      "id": 1,
+      "firstName": "Владимир",
+      "lastName": "Петров",
+      "middleName": "Иванович",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+    },
+    "startDateAppointment": "2024-10-20T10:20:30",
+    "endDateAppointment": null
+  },
+  {
+    "id": 1,
+    "doctor": {
+      "id": 1,
+      "firstName": "Вадим",
+      "lastName": "Петров",
+      "middleName": "Васильев",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png",
+    },
+    "client": {
+
+      "id": 1,
+      "firstName": "Владимир",
+      "lastName": "Петров",
+      "middleName": "Иванович",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+    },
+    "startDateAppointment": "2024-10-20T10:20:30",
+    "endDateAppointment": null
+  },
+  {
+    "id": 1,
+    "doctor": {
+      "id": 1,
+      "firstName": "Вадим",
+      "lastName": "Петров",
+      "middleName": "Васильев",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png",
+    },
+    "client": {
+      "id": 1,
+      "firstName": "Владимир",
+      "lastName": "Петров",
+      "middleName": "Иванович",
+      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+    },
+    "startDateAppointment": "2024-10-20T10:20:30",
+    "endDateAppointment": null
+  }
+]
 }

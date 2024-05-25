@@ -31,9 +31,10 @@ export type AppointmentDetailsPropsType = {
 // Actions
 export enum AppointmentActions {
   removeAppointmentByIdAction = "REMOVE_APPOINTMENT_BY_ID",
-  addAppointmentAction = "ADD_DISEASE",
-  editAppointmentAction = "EDIT_DISEASE",
-  searchAppointmentAction = "SEARCH_DISEASE"
+  addAppointmentAction = "ADD_APPOINTMENT",
+  editAppointmentAction = "EDIT_APPOINTMENT",
+  searchAppointmentAction = "SEARCH_APPOINTMENT",
+  getListAppointmentsAction = "GET_LIST_APPOINTMENTS_ACTION"
 }
 
 export type RemoveAppointmentByIdActionType = {
@@ -56,11 +57,16 @@ export type SearchAppointmentActionType = {
   searchTerm: string
 }
 
+export type GetListAppointmentsActionType = {
+  type: AppointmentActions.getListAppointmentsAction
+  payload: Array<AppointmentType>
+}
 export type AppointmentReducerActionType = (
   RemoveAppointmentByIdActionType
   | AddAppointmentActionType
   | EditAppointmentActionType
   | SearchAppointmentActionType
+  | GetListAppointmentsActionType
 )
 
 

@@ -43,7 +43,6 @@ const ListDiagnosis: React.FC<ListDiagnosisProps> = (props) => {
       "firstName": "",
       "lastName": "",
       "middleName": "",
-      "profession": { "id": 1, "name": "" },
       "avatar": ""
     },
     "diseases": [

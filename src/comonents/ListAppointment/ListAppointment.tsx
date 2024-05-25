@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useState } from "react";
+import React, { HTMLAttributes, useEffect, useState } from "react";
 import "./ListAppointment.css";
 import {
   Avatar,
@@ -22,6 +22,14 @@ import { tableStyles } from "../../styles";
 import { AppointmentType, ListAppointmentsProps } from "../../state/appointment.type";
 import SearchAndFilter from "../Search/Search";
 import AddAppointmentPopup from "./AddAppointmentPopup/AddAppointmentPopup";
+import { doctorAPI } from "../../api/doctor.api";
+import { getListDoctordAC } from "../../state/doctor-reducer";
+import { clientAPI } from "../../api/client.api";
+import { getListClientdAC } from "../../state/client-reducer";
+import { appointmentAPI } from "../../api/appointment.api";
+import { getListAppointmentsAC } from "../../state/appointment-reducer";
+import { fetchDoctors } from "../../thunks/docker-thunk";
+import { useDispatch } from "react-redux";
 
 const ListAppointmentis: React.FC<ListAppointmentsProps> = (props) => {
   const emptyAppointment: AppointmentType = {
@@ -38,7 +46,6 @@ const ListAppointmentis: React.FC<ListAppointmentsProps> = (props) => {
       "firstName": "",
       "lastName": "",
       "middleName": "",
-      "profession": { "id": 1, "name": "" },
       "avatar": ""
     },
     "startDateAppointment": "",
@@ -47,6 +54,7 @@ const ListAppointmentis: React.FC<ListAppointmentsProps> = (props) => {
 
   const [openPopup, setOpenPopup] = useState(false);
   const [editingAppointment, setEditingAppointment] = useState<AppointmentType>(emptyAppointment);
+  const dispatch = useDispatch()
 
   const handleOpenPopup = (appointment: AppointmentType | null) => {
     if (appointment !== null) {
@@ -75,6 +83,38 @@ const ListAppointmentis: React.FC<ListAppointmentsProps> = (props) => {
     },
   }));
 
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const response = await appointmentAPI.getListAppointments();
+        dispatch(getListAppointmentsAC(response.data));
+      } catch (error) {
+        console.error("Error fetching appointment", error);
+      }
+    };
+    const fetchDoctors = async () => {
+      try {
+        const response = await doctorAPI.getListDoctors();
+        dispatch(getListDoctordAC(response.data));
+      } catch (error) {
+        console.error("Error fetching doctors", error);
+      }
+    };
+
+    const fetchClients = async () => {
+      try {
+        const response = await clientAPI.getListClients();
+        dispatch(getListClientdAC(response.data));
+      } catch (error) {
+        console.error("Error fetching clients", error);
+      }
+    };
+    fetchClients();
+    fetchDoctors();
+    fetchAppointments()
+  }, [dispatch]);
+
+  console.log(props.appointments)
   return (
     <>
 
@@ -160,3 +200,7 @@ const ListAppointmentis: React.FC<ListAppointmentsProps> = (props) => {
 };
 
 export default ListAppointmentis;
+function dispatch(arg0: any) {
+    throw new Error("Function not implemented.");
+}
+

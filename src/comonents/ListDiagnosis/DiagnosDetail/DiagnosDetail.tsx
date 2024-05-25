@@ -13,7 +13,6 @@ export const DiagnosDetails: React.FC<DiagnosDetailsPropsType> = (props) => {
   const [diagnos, setDiagnos] = useState<DiagnosType | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate(); // Хук для навигации
   const [openPopup, setOpenPopup] = useState(false);
   const emptyDiagnos: DiagnosType = {
     "id": 0,
@@ -31,7 +30,6 @@ export const DiagnosDetails: React.FC<DiagnosDetailsPropsType> = (props) => {
       "firstName": "",
       "lastName": "",
       "middleName": "",
-      "profession": { "id": 1, "name": "" },
       "avatar": ""
     },
     "diseases": [

@@ -19,7 +19,6 @@ export type DoctorShortType = {
   lastName: string;
   firstName: string;
   middleName: string;
-  profession: ProfessionType;
   avatar: string;
 };
 

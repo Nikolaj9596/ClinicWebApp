@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore, Store } from "redux";
+import { combineReducers, createStore, Store } from "redux";
 import { appointmentReducer } from "./appointment-reducer";
 import { AppointmentType } from "./appointment.type";
 import { categoryDiseasesReducer } from "./category-disease-reducer";

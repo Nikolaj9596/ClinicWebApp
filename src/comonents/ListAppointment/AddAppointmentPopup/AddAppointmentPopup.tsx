@@ -94,7 +94,7 @@ const AddAppointmentPopup: React.FC<AddAppointmentPopupProps> = (props) => {
           id="startDateAppointment"
           name="startDateAppointment"
           label="Дата начала приема"
-          type="date"
+          type="datetime-local"
           fullWidth
           InputLabelProps={{
             shrink: true,
@@ -107,7 +107,7 @@ const AddAppointmentPopup: React.FC<AddAppointmentPopupProps> = (props) => {
           id="endDateAppointment"
           name="endDateAppointment"
           label="Дата окончания приема"
-          type="date"
+          type="datetime-local"
           fullWidth
           InputLabelProps={{
             shrink: true,

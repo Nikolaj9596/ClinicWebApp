@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ListDisease.css";
 import {
   Box,
@@ -21,16 +21,25 @@ import { tableStyles } from "../../styles";
 import { DiseaseType, ListDiseasesProps } from "../../state/disease.type";
 import SearchAndFilter from "../Search/Search";
 import AddDiseasePopup from "./AddDiseasePoppup/AddDiseasePopup";
+import { useDispatch } from "react-redux";
+import { diseaseAPI } from "../../api/disease.api";
+import { getListDiseaseAC } from "../../state/disease-reducer";
+import { categoryDiseaseAPI } from "../../api/category_disease.api";
+import { getListCategoryDiseasesdAC } from "../../state/category-disease-reducer";
+import { clientAPI } from "../../api/client.api";
+import { getListClientdAC } from "../../state/client-reducer";
+import { doctorAPI } from "../../api/doctor.api";
+import { getListDoctordAC } from "../../state/doctor-reducer";
 
 const ListDiseases: React.FC<ListDiseasesProps> = (props) => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [openPopup, setOpenPopup] = useState(false);
   const [editingDisease, setEditingDisease] = useState<DiseaseType>({
     id: 0,
     name: "",
     description: "",
-    category_disease: { id: 0, name: "" }
+    categoryDisease: { id: 0, name: "" }
   });
 
   const handleVisibilityDetail = (diseaseId: number) => {
@@ -47,6 +56,29 @@ const ListDiseases: React.FC<ListDiseasesProps> = (props) => {
   const handleClosePopup = () => {
     setOpenPopup(false);
   };
+
+  useEffect(() => {
+    const fetchDisease = async () => {
+      try {
+        const response = await diseaseAPI.getListDiseases();
+        dispatch(getListDiseaseAC(response.data));
+      } catch (error) {
+        console.error("Error fetching disease", error);
+      }
+    };
+
+    const fetchCategoryDisease = async () => {
+      try {
+        const response = await categoryDiseaseAPI.getListCategoryDisease();
+        dispatch(getListCategoryDiseasesdAC(response.data));
+      } catch (error) {
+        console.error("Error fetching category disease", error);
+      }
+    };
+
+    fetchDisease();
+    fetchCategoryDisease()
+  }, [dispatch]);
 
   return (
     <>
@@ -86,7 +118,7 @@ const ListDiseases: React.FC<ListDiseasesProps> = (props) => {
               return (
                 <TableRow key={disease.id} hover style={{ cursor: 'pointer' }}>
                   <TableCell>{disease.name}</TableCell>
-                  <TableCell>{disease.category_disease.name}</TableCell>
+                  <TableCell>{disease.categoryDisease.name}</TableCell>
                   <TableCell align="center">
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                       <IconButton onClick={() => handleOpenPopup(disease)}>

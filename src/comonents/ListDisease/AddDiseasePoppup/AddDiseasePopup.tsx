@@ -44,7 +44,7 @@ const AddDiseasePopup: React.FC<AddDiseasePopupProps> = (props) => {
     if (categoryDisease) {
       setNewDisease((prevDisease) => ({
         ...prevDisease,
-        category_disease: {
+        categoryDisease: {
           id: categoryDisease.id,
           name: categoryDisease.name,
         },
@@ -87,8 +87,8 @@ const AddDiseasePopup: React.FC<AddDiseasePopupProps> = (props) => {
           <InputLabel id="category-label">Категория заболевания</InputLabel>
           <Select
             labelId="category-label"
-            id="category_diseases"
-            value={newDisease.category_disease?.name || ''}
+            id="categoryDiseases"
+            value={newDisease.categoryDisease?.name || ''}
             label="Категория заболевания"
             onChange={handleCategoryDiseaseChange}
           >

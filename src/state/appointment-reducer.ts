@@ -1,84 +1,50 @@
-import { AddAppointmentActionType, AppointmentActions, AppointmentReducerActionType, AppointmentType, EditAppointmentActionType, RemoveAppointmentByIdActionType, SearchAppointmentActionType } from "./appointment.type";
+import { appointmentAPI } from "../api/appointment.api";
+import { AddAppointmentActionType, AppointmentActions, AppointmentReducerActionType, AppointmentType, EditAppointmentActionType, GetListAppointmentsActionType, RemoveAppointmentByIdActionType, SearchAppointmentActionType } from "./appointment.type";
 
 
-const initState: Array<AppointmentType> = [
-  {
-    "id": 1,
-    "doctor": {
-      "id": 1,
-      "firstName": "Вадим",
-      "lastName": "Петров",
-      "middleName": "Васильев",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png",
-      "profession": { "id": 1, "name": "Стоматолог" }
-    },
-    "client": {
-
-      "id": 1,
-      "firstName": "Владимир",
-      "lastName": "Петров",
-      "middleName": "Иванович",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-    },
-    "startDateAppointment": "2024-10-20T10:20:30",
-    "endDateAppointment": null
-  },
-  {
-    "id": 1,
-    "doctor": {
-      "id": 1,
-      "firstName": "Вадим",
-      "lastName": "Петров",
-      "middleName": "Васильев",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png",
-      "profession": { "id": 1, "name": "Стоматолог" }
-    },
-    "client": {
-
-      "id": 1,
-      "firstName": "Владимир",
-      "lastName": "Петров",
-      "middleName": "Иванович",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-    },
-    "startDateAppointment": "2024-10-20T10:20:30",
-    "endDateAppointment": null
-  },
-  {
-    "id": 1,
-    "doctor": {
-      "id": 1,
-      "firstName": "Вадим",
-      "lastName": "Петров",
-      "middleName": "Васильев",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png",
-      "profession": { "id": 1, "name": "Стоматолог" }
-    },
-    "client": {
-
-      "id": 1,
-      "firstName": "Владимир",
-      "lastName": "Петров",
-      "middleName": "Иванович",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-    },
-    "startDateAppointment": "2024-10-20T10:20:30",
-    "endDateAppointment": null
-  }
-]
+const initState: Array<AppointmentType> = []
 
 
 export const appointmentReducer = (state: Array<AppointmentType> = initState, action: AppointmentReducerActionType): Array<AppointmentType> => {
+
+  console.log(action.type)
   switch (action.type) {
     case (AppointmentActions.removeAppointmentByIdAction):
+      const deleteAppointment = async () => {
+        try {
+          await appointmentAPI.deleteAppointment(action.appointmentId);
+        } catch (error) {
+          console.error("Error delete appointment", error);
+        }
+      };
+      deleteAppointment();
       return state.filter(c => c.id !== action.appointmentId)
+
     case (AppointmentActions.addAppointmentAction):
+      const createAppointment = async () => {
+        try {
+          await appointmentAPI.createAppointment(action.appointment);
+        } catch (error) {
+          console.error("Error create appointment", error);
+        }
+      };
+      createAppointment();
       return [...state, action.appointment]
+
     case AppointmentActions.editAppointmentAction:
       const isAppointmentExist = state.find(appointment => appointment.id === action.appointment.id);
       if (!isAppointmentExist) {
         return state;
       }
+
+      const editAppointment = async () => {
+        try {
+          await appointmentAPI.updateAppointment(action.appointment);
+        } catch (error) {
+          console.error("Error update appointment", error);
+        }
+      };
+      editAppointment();
       return state.map(appointment =>
         appointment.id === action.appointment.id
           ? action.appointment
@@ -89,6 +55,9 @@ export const appointmentReducer = (state: Array<AppointmentType> = initState, ac
         return initState
       }
       return state.filter(c => c.startDateAppointment == action.searchTerm)
+
+    case (AppointmentActions.getListAppointmentsAction):
+      return action.payload
     default:
       return state;
   }
@@ -97,7 +66,6 @@ export const appointmentReducer = (state: Array<AppointmentType> = initState, ac
 export const removeAppointmentByIdAC = (appointmentId: number): RemoveAppointmentByIdActionType => {
   return { type: AppointmentActions.removeAppointmentByIdAction, appointmentId: appointmentId }
 }
-
 
 export const addAppointmentAC = (appointment: AppointmentType): AddAppointmentActionType => {
   return { type: AppointmentActions.addAppointmentAction, appointment: appointment }
@@ -111,3 +79,6 @@ export const searchAppointmentAC = (searchTerm: string): SearchAppointmentAction
   return { type: AppointmentActions.searchAppointmentAction, searchTerm: searchTerm }
 }
 
+export const getListAppointmentsAC = (payload: Array<AppointmentType>): GetListAppointmentsActionType => {
+  return { type: AppointmentActions.getListAppointmentsAction, payload: payload }
+}

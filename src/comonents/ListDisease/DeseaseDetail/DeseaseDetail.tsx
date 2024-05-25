@@ -18,7 +18,7 @@ export const DiseaseDetails: React.FC<DiseaseDetailsPropsType> = (props) => {
     id: 0,
     name: "",
     description: "",
-    category_disease: { id: 0, name: "" }
+    categoryDisease: { id: 0, name: "" }
   });
   const StyledPaper = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(3),
@@ -101,7 +101,7 @@ export const DiseaseDetails: React.FC<DiseaseDetailsPropsType> = (props) => {
           </Typography>
           <Divider />
           <Typography variant="body1" color="textSecondary" gutterBottom>
-            Категория: {disease.category_disease.name}
+            Категория: {disease.categoryDisease.name}
           </Typography>
           <Divider />
           <Typography variant="h6" color="textPrimary" gutterBottom>

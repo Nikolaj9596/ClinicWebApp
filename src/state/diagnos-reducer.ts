@@ -18,7 +18,6 @@ const initState: Array<DiagnosType> = [
       "firstName": "Владимир",
       "lastName": "Мальков",
       "middleName": "Иванович",
-      "profession": { "id": 1, "name": "Стоматолог" },
       "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
     },
     "diseases": [
@@ -53,7 +52,6 @@ const initState: Array<DiagnosType> = [
       "firstName": "Владимир",
       "lastName": "Петров",
       "middleName": "Иванович",
-      "profession": { "id": 1, "name": "Стоматолог" },
       "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
     },
     "diseases": [],
@@ -75,7 +73,6 @@ const initState: Array<DiagnosType> = [
       "firstName": "Владимир",
       "lastName": "Петров",
       "middleName": "Иванович",
-      "profession": { "id": 1, "name": "Стоматолог" },
       "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
     },
     "diseases": [

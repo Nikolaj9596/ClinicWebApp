@@ -32,13 +32,9 @@ const App = () => {
   const diagnosis = useSelector<AppRootState, Array<DiagnosType>>(state => state.diagnosis)
   const appointments = useSelector<AppRootState, Array<AppointmentType>>(state => state.appointments)
   const professions = useSelector<AppRootState, Array<ProfessionType>>(state => state.professions)
+  const categoryDiseases = useSelector<AppRootState, Array<CategoryDiseasesType>>(state => state.categoyDiseases)
 
-  const categoryDiseases: Array<CategoryDiseasesType> = [
-    { id: 1, name: 'ОРВ' },
-    { id: 2, name: 'Храническое' },
-    { id: 3, name: 'Расператорное' },
-  ];
-  const navigate = useNavigate(); // Хук для навигации
+  const navigate = useNavigate();
 
   //Appointment
   const handleAddAppointment = (appointment: AppointmentType): void => {
@@ -162,7 +158,6 @@ const App = () => {
       </nav>
       <div className="content">
         <Routes>
-          {/* <Route path="/test" element={<ClientProfilePage client={{ id: 1, lastName: 'Иванов', firstName: 'Иван', middleName: 'Иванович', dateBirthday: '01.01.1980', address: 'г. Москва, ул. Пушкина, д.1', avatar: 'url_to_avatar_image', }} />} /> */}
           <Route path="/doctors" element={<ListDoctors doctors={doctors} handleAddDoctor={handleAddDoctor} handleDeleteDoctor={handleDeleteDoctor} handleEditDoctor={handleEditDoctor} handleSearchDoctor={handleSearchDoctor} professions={professions} />} />
           <Route path="/clients" element={<ListClients clients={clients} handleAddClient={handleAddClient} handleDeleteClient={handleDeleteClient} handleEditClient={handleEditClient} handleSearchClient={handleSearchClient} />} />
           <Route path="/diseases" element={<ListDiseases diseases={diseases} handleAddDisease={handleAddDisease} handleEditDisease={handleEditDisease} handleSearchDisease={handleSearchDisease} handleDeleteDisease={handleDeleteDisease} categoryDiseases={categoryDiseases} />} />
