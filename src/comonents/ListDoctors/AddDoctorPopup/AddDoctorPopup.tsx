@@ -27,7 +27,6 @@ const AddDoctorPopup: React.FC<AddDoctorPopupProps> = ({ open, handleClose, hand
   };
 
   const onAddClick = () => {
-    console.log(newDoctor.id)
     if (newDoctor.id === 0) {
       handleAdd(newDoctor)
     } else {

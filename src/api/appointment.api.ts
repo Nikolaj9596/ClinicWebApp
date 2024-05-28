@@ -25,7 +25,6 @@ export const appointmentAPI = {
   },
   
   createAppointment(appointment: AppointmentType) {
-    console.log(appointment.startDateAppointment)
     const appointmentData = {
       startDateAppointment: appointment.startDateAppointment,
       endDateAppointment: appointment.endDateAppointment,

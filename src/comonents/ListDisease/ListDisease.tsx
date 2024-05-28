@@ -3,8 +3,8 @@ import "./ListDisease.css";
 import {
   Box,
   IconButton,
-  Paper,
   Table,
+  Paper,
   TableBody,
   TableCell,
   TableContainer,
@@ -26,10 +26,6 @@ import { diseaseAPI } from "../../api/disease.api";
 import { getListDiseaseAC } from "../../state/disease-reducer";
 import { categoryDiseaseAPI } from "../../api/category_disease.api";
 import { getListCategoryDiseasesdAC } from "../../state/category-disease-reducer";
-import { clientAPI } from "../../api/client.api";
-import { getListClientdAC } from "../../state/client-reducer";
-import { doctorAPI } from "../../api/doctor.api";
-import { getListDoctordAC } from "../../state/doctor-reducer";
 
 const ListDiseases: React.FC<ListDiseasesProps> = (props) => {
   const navigate = useNavigate();

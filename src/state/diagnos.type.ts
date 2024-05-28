@@ -38,7 +38,8 @@ export enum DiagnosActions {
   removeDiagnosByIdAction = "REMOVE_DIAGNOS_BY_ID",
   addDiagnosAction = "ADD_DIAGNOS",
   editDiagnosAction = "EDIT_DIAGNOS",
-  searchDiagnosAction = "SEARCH_DIAGNOS"
+  searchDiagnosAction = "SEARCH_DIAGNOS",
+  getListDiagnosAction = "GET_LIST_DIAGNOS"
 }
 
 export type RemoveDiagnosByIdActionType = {
@@ -61,11 +62,17 @@ export type SearchDiagnosActionType = {
   searchTerm: string
 }
 
+export type GetListDiagnosActionType = {
+  type: DiagnosActions.getListDiagnosAction
+  payload: Array<DiagnosType>
+}
+
 export type DiagnosReducerActionType = (
   RemoveDiagnosByIdActionType
   | AddDiagnosActionType
   | EditDiagnosActionType
   | SearchDiagnosActionType
+  | GetListDiagnosActionType
 )
 
 

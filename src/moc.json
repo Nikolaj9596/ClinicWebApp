@@ -126,65 +126,145 @@
     }
   ],
   "appointments": [
-
-  {
-    "id": 1,
-    "doctor": {
+    {
       "id": 1,
-      "firstName": "Вадим",
-      "lastName": "Петров",
-      "middleName": "Васильев",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png",
+      "doctor": {
+        "id": 1,
+        "firstName": "Вадим",
+        "lastName": "Петров",
+        "middleName": "Васильев",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "client": {
+        "id": 1,
+        "firstName": "Владимир",
+        "lastName": "Петров",
+        "middleName": "Иванович",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "startDateAppointment": "2024-10-20T10:20:30",
+      "endDateAppointment": null
     },
-    "client": {
-
+    {
       "id": 1,
-      "firstName": "Владимир",
-      "lastName": "Петров",
-      "middleName": "Иванович",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      "doctor": {
+        "id": 1,
+        "firstName": "Вадим",
+        "lastName": "Петров",
+        "middleName": "Васильев",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "client": {
+        "id": 1,
+        "firstName": "Владимир",
+        "lastName": "Петров",
+        "middleName": "Иванович",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "startDateAppointment": "2024-10-20T10:20:30",
+      "endDateAppointment": null
     },
-    "startDateAppointment": "2024-10-20T10:20:30",
-    "endDateAppointment": null
-  },
-  {
-    "id": 1,
-    "doctor": {
+    {
       "id": 1,
-      "firstName": "Вадим",
-      "lastName": "Петров",
-      "middleName": "Васильев",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png",
-    },
-    "client": {
-
+      "doctor": {
+        "id": 1,
+        "firstName": "Вадим",
+        "lastName": "Петров",
+        "middleName": "Васильев",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "client": {
+        "id": 1,
+        "firstName": "Владимир",
+        "lastName": "Петров",
+        "middleName": "Иванович",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "startDateAppointment": "2024-10-20T10:20:30",
+      "endDateAppointment": null
+    }
+  ],
+  "diagnosis": [
+    {
       "id": 1,
-      "firstName": "Владимир",
-      "lastName": "Петров",
-      "middleName": "Иванович",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      "name": "Бронхит и Насморк",
+      "description": "Полное описание по заболеванию Бронхит",
+      "client": {
+        "id": 1,
+        "firstName": "Владимир",
+        "lastName": "Ветров",
+        "middleName": "Иванович",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "doctor": {
+        "id": 1,
+        "firstName": "Владимир",
+        "lastName": "Мальков",
+        "middleName": "Иванович",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "diseases": [
+        {
+          "id": 1,
+          "name": "Бронхит"
+        },
+        {
+          "id": 2,
+          "name": "Бронхит"
+        },
+        {
+          "id": 3,
+          "name": "Бронхит"
+        }
+      ],
+      "status": "active"
     },
-    "startDateAppointment": "2024-10-20T10:20:30",
-    "endDateAppointment": null
-  },
-  {
-    "id": 1,
-    "doctor": {
-      "id": 1,
-      "firstName": "Вадим",
-      "lastName": "Петров",
-      "middleName": "Васильев",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png",
+    {
+      "id": 2,
+      "name": "Астма",
+      "description": "Полное описание по заболеванию Бронхит",
+      "client": {
+        "id": 1,
+        "firstName": "Владимир",
+        "lastName": "Петров",
+        "middleName": "Иванович",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "doctor": {
+        "id": 1,
+        "firstName": "Владимир",
+        "lastName": "Петров",
+        "middleName": "Иванович",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "diseases": [],
+      "status": "active"
     },
-    "client": {
-      "id": 1,
-      "firstName": "Владимир",
-      "lastName": "Петров",
-      "middleName": "Иванович",
-      "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
-    },
-    "startDateAppointment": "2024-10-20T10:20:30",
-    "endDateAppointment": null
-  }
-]
+    {
+      "id": 3,
+      "name": "Аргрит",
+      "description": "Полное описание по заболеванию Бронхит",
+      "client": {
+        "id": 1,
+        "firstName": "Владимир",
+        "lastName": "Петров",
+        "middleName": "Иванович",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "doctor": {
+        "id": 1,
+        "firstName": "Владимир",
+        "lastName": "Петров",
+        "middleName": "Иванович",
+        "avatar": "https://gas-kvas.com/uploads/posts/2023-02/1675346690_gas-kvas-com-p-pop-art-litso-risunok-22.png"
+      },
+      "diseases": [
+        {
+          "id": 1,
+          "name": "Бронхит"
+        }
+      ],
+      "status": "active"
+    }
+  ]
 }

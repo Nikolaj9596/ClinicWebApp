@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useState } from "react";
+import React, { HTMLAttributes, useEffect, useState } from "react";
 import "./ListDiagnosis.css";
 import {
   Avatar,
@@ -24,9 +24,18 @@ import { tableStyles } from "../../styles";
 import { DiagnosType, ListDiagnosisProps } from "../../state/diagnos.type";
 import SearchAndFilter from "../Search/Search";
 import AddDiagnosPopup from "./AddDiagnosPopup/AddDiagnosPopup";
+import { useDispatch } from "react-redux";
+import { diagnosAPI } from "../../api/diagnos.api";
+import { getListDiagnosAC } from "../../state/diagnos-reducer";
+import { doctorAPI } from "../../api/doctor.api";
+import { getListDoctordAC } from "../../state/doctor-reducer";
+import { clientAPI } from "../../api/client.api";
+import { getListClientdAC } from "../../state/client-reducer";
 
 const ListDiagnosis: React.FC<ListDiagnosisProps> = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
   const emptyDiagnos: DiagnosType = {
     "id": 0,
     "name": "",
@@ -63,6 +72,38 @@ const ListDiagnosis: React.FC<ListDiagnosisProps> = (props) => {
   }
   const [openPopup, setOpenPopup] = useState(false);
   const [editingDiagnos, setEditingDiagnos] = useState<DiagnosType>(emptyDiagnos);
+
+
+  useEffect(() => {
+    const fetchDiagnos = async () => {
+      try {
+        const response = await diagnosAPI.getListDiagnosis();
+        dispatch(getListDiagnosAC(response.data));
+      } catch (error) {
+        console.error("Error fetching diagnos", error);
+      }
+    };
+    const fetchDoctors = async () => {
+      try {
+        const response = await doctorAPI.getListDoctors();
+        dispatch(getListDoctordAC(response.data));
+      } catch (error) {
+        console.error("Error fetching doctors", error);
+      }
+    };
+
+    const fetchClients = async () => {
+      try {
+        const response = await clientAPI.getListClients();
+        dispatch(getListClientdAC(response.data));
+      } catch (error) {
+        console.error("Error fetching clients", error);
+      }
+    };
+    fetchClients();
+    fetchDoctors();
+    fetchDiagnos()
+  }, [dispatch]);
 
   const handleVisibilityDetail = (diagnosId: number) => {
     navigate(`/diagnosis/${diagnosId}`);

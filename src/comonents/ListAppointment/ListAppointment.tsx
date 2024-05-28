@@ -28,7 +28,6 @@ import { clientAPI } from "../../api/client.api";
 import { getListClientdAC } from "../../state/client-reducer";
 import { appointmentAPI } from "../../api/appointment.api";
 import { getListAppointmentsAC } from "../../state/appointment-reducer";
-import { fetchDoctors } from "../../thunks/docker-thunk";
 import { useDispatch } from "react-redux";
 
 const ListAppointmentis: React.FC<ListAppointmentsProps> = (props) => {
@@ -114,7 +113,6 @@ const ListAppointmentis: React.FC<ListAppointmentsProps> = (props) => {
     fetchAppointments()
   }, [dispatch]);
 
-  console.log(props.appointments)
   return (
     <>
 
