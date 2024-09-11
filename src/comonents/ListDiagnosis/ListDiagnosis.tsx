@@ -31,6 +31,8 @@ import { doctorAPI } from "../../api/doctor.api";
 import { getListDoctordAC } from "../../state/doctor-reducer";
 import { clientAPI } from "../../api/client.api";
 import { getListClientdAC } from "../../state/client-reducer";
+import { getListDiseaseAC } from "../../state/disease-reducer";
+import { diseaseAPI } from "../../api/disease.api";
 
 const ListDiagnosis: React.FC<ListDiagnosisProps> = (props) => {
   const navigate = useNavigate();
@@ -91,7 +93,6 @@ const ListDiagnosis: React.FC<ListDiagnosisProps> = (props) => {
         console.error("Error fetching doctors", error);
       }
     };
-
     const fetchClients = async () => {
       try {
         const response = await clientAPI.getListClients();
@@ -100,6 +101,16 @@ const ListDiagnosis: React.FC<ListDiagnosisProps> = (props) => {
         console.error("Error fetching clients", error);
       }
     };
+
+    const fetchDisease = async () => {
+      try {
+        const response = await diseaseAPI.getListDiseases();
+        dispatch(getListDiseaseAC(response.data));
+      } catch (error) {
+        console.error("Error fetching disease", error);
+      }
+    };
+    fetchDisease();
     fetchClients();
     fetchDoctors();
     fetchDiagnos()
@@ -129,8 +140,8 @@ const ListDiagnosis: React.FC<ListDiagnosisProps> = (props) => {
     display: 'inline-block',
     borderRadius: '15px',
     padding: theme.spacing(0.5, 2),
-    backgroundColor: status === 'active' ? '#328BED' : 'red',
-    color: theme.palette.getContrastText(status === 'active' ? '#328BED' : 'red'),
+    backgroundColor: status.toLowerCase() === 'active' ? '#328BED' : '#FF0000',
+    color: theme.palette.getContrastText(status.toLowerCase() === 'active' ? '#328BED' : '#FF0000'),
     boxShadow: '0px 1px 5px rgba(0, 0, 0, 0.2)',
   }));
 
@@ -148,7 +159,6 @@ const ListDiagnosis: React.FC<ListDiagnosisProps> = (props) => {
       marginRight: theme.spacing(1),
     },
   }));
-
   return (
     <>
 
@@ -210,7 +220,7 @@ const ListDiagnosis: React.FC<ListDiagnosisProps> = (props) => {
                   </StyledBox>
                 </TableCell>
                 <TableCell>
-                  <StatusBadge status={diagnos.status}>
+                  <StatusBadge status={diagnos.status.toLowerCase() as "active" | "inactive"}>
                     {diagnos.status}
                   </StatusBadge>
                 </TableCell>

@@ -29,7 +29,7 @@ export const diagnosAPI = {
       description: diagnos.description,
       status: diagnos.status,
       name: diagnos.name,
-      diseases: diagnos.diseases,
+      disease: diagnos.diseases.map(d => d.id),
       doctor: diagnos.doctor.id,
       client: diagnos.client.id
     }
@@ -41,12 +41,13 @@ export const diagnosAPI = {
     const promise = api.delete(`/${diagnosId}`);
     return promise;
   },
+
   updateDiagnos(diagnos: DiagnosType) {
     const diagnosData = {
       description: diagnos.description,
       status: diagnos.status,
       name: diagnos.name,
-      diseases: diagnos.diseases,
+      disease: diagnos.diseases.map(d => d.id),
       doctor: diagnos.doctor.id,
       client: diagnos.client.id
     }
